@@ -20,7 +20,7 @@ public:
 	void nextTurn();
 	void rollDices(int pNumber);
 	void selectDice(int pNumber, int index);
-	int  getDiceValue(int index);
+	int  getDiceValue(int pNumber, int index);
 	void updateScore();
 	int calculateScore(int pNumber); //returns points for player pNumber dices// check for combinations  if none present return sum of all values
 	bool gameOver();

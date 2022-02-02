@@ -71,6 +71,20 @@ void Game::selectDice(int pNumber, int index) {
 
 }
 
+int Game::getDiceValue(int pNumber, int index)
+{
+	if(pNumber)
+	{
+		return this->player2Dices[index];
+	}
+	else if (!pNumber)
+	{
+		return this->player1Dices[index];
+	}
+
+	return 0;
+}
+
 int  Game::calculateScore(int pNumber) {
 
 	throw std::exception();

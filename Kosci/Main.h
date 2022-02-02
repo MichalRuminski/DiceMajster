@@ -471,8 +471,10 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	for each (System::Object^ p in this->gamnefield_p1->Controls)
 	{
 		if (p->GetType() == PictureBox::typeid) {
-			((PictureBox^)p)->Visible = true;
-			((PictureBox^)p)->Image = dicePictures[1];
+			if (!((PictureBox^)p)->Visible) {
+				((PictureBox^)p)->Visible = true;
+				((PictureBox^)p)->Image = dicePictures[this->game->getDiceValue(0) - 1];
+			}
 		}
 	}
 }
