@@ -15,25 +15,39 @@ namespace Kosci {
 
 	using namespace msclr::interop;
 
-	
+
 	public ref class Main : public System::Windows::Forms::Form
 	{
 	public:
 		Main(void)
 		{
+			dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
+			InitializeTextures();
 			InitializeComponent();
-			
+
 		}
 
 	protected:
-		
+
 		~Main()
 		{
 			if (components)
 			{
 				delete components;
 			}
+			//check if member field is added to components container
+			if (dicePictures) {
+				delete dicePictures;
+			}
 		}
+
+	private: AboutWindow^ aboutWindow;
+	private: StartWindow^ startWindow;
+	private: array<System::Drawing::Bitmap^>^ dicePictures;
+
+	private: Game* game;
+
+
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	protected:
 	private: System::Windows::Forms::ToolStripMenuItem^ graToolStripMenuItem;
@@ -42,10 +56,6 @@ namespace Kosci {
 	private: System::Windows::Forms::ToolStripMenuItem^ helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutToolStripMenuItem;
 
-	private: AboutWindow^ aboutWindow;
-	private: StartWindow^ startWindow;
-
-	private: Game *game;
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::GroupBox^ gamnefield_p1;
 	private: System::Windows::Forms::Panel^ panel2;
@@ -53,27 +63,29 @@ namespace Kosci {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::PictureBox^ pictureBox5;
-	private: System::Windows::Forms::PictureBox^ pictureBox4;
-	private: System::Windows::Forms::PictureBox^ pictureBox3;
-	private: System::Windows::Forms::PictureBox^ pictureBox2;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::PictureBox^ picturebox_D5P1;
+	private: System::Windows::Forms::PictureBox^ picturebox_D4P1;
+	private: System::Windows::Forms::PictureBox^ picturebox_D3P1;
+	private: System::Windows::Forms::PictureBox^ picturebox_D2P1;
+	private: System::Windows::Forms::PictureBox^ picturebox_D1P1;
+
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::PictureBox^ pictureBox10;
-	private: System::Windows::Forms::PictureBox^ pictureBox9;
-	private: System::Windows::Forms::PictureBox^ pictureBox8;
-	private: System::Windows::Forms::PictureBox^ pictureBox7;
-	private: System::Windows::Forms::PictureBox^ pictureBox6;
+	private: System::Windows::Forms::PictureBox^ picturebox_D5P2;
+	private: System::Windows::Forms::PictureBox^ picturebox_D4P2;
+	private: System::Windows::Forms::PictureBox^ picturebox_D3P2;
+	private: System::Windows::Forms::PictureBox^ picturebox_D2P2;
+	private: System::Windows::Forms::PictureBox^ picturebox_D1P2;
+
 
 	private:
-		
-		System::ComponentModel::Container ^components;
-		
+
+		System::ComponentModel::Container^ components;
+
 
 #pragma region Windows Form Designer generated code
-		
+
 		void InitializeComponent(void)
 		{
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
@@ -83,40 +95,40 @@ namespace Kosci {
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->gamnefield_p1 = (gcnew System::Windows::Forms::GroupBox());
-			this->gamefield_p2 = (gcnew System::Windows::Forms::GroupBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->gamnefield_p1 = (gcnew System::Windows::Forms::GroupBox());
+			this->picturebox_D5P1 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D4P1 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D3P1 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D2P1 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D1P1 = (gcnew System::Windows::Forms::PictureBox());
+			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox5 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox6 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox7 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox8 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox9 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox10 = (gcnew System::Windows::Forms::PictureBox());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->gamefield_p2 = (gcnew System::Windows::Forms::GroupBox());
+			this->picturebox_D5P2 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D4P2 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D3P2 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D2P2 = (gcnew System::Windows::Forms::PictureBox());
+			this->picturebox_D1P2 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1->SuspendLayout();
 			this->panel1->SuspendLayout();
-			this->panel2->SuspendLayout();
 			this->gamnefield_p1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D5P1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D4P1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D3P1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D2P1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D1P1))->BeginInit();
+			this->panel2->SuspendLayout();
 			this->gamefield_p2->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox7))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox8))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox9))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox10))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D5P2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D4P2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D3P2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D2P2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D1P2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -175,9 +187,104 @@ namespace Kosci {
 			this->panel1->Controls->Add(this->button1);
 			this->panel1->Controls->Add(this->gamnefield_p1);
 			this->panel1->Location = System::Drawing::Point(0, 28);
-			this->panel1->Name = L"panel_P1";
+			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(461, 661);
 			this->panel1->TabIndex = 1;
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(37, 490);
+			this->textBox1->Multiline = true;
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(357, 162);
+			this->textBox1->TabIndex = 3;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(319, 435);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 2;
+			this->button2->Text = L"Nastepna tura";
+			this->button2->UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(37, 435);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"Rzucaj";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Main::button1_Click);
+			// 
+			// gamnefield_p1
+			// 
+			this->gamnefield_p1->Controls->Add(this->picturebox_D5P1);
+			this->gamnefield_p1->Controls->Add(this->picturebox_D4P1);
+			this->gamnefield_p1->Controls->Add(this->picturebox_D3P1);
+			this->gamnefield_p1->Controls->Add(this->picturebox_D2P1);
+			this->gamnefield_p1->Controls->Add(this->picturebox_D1P1);
+			this->gamnefield_p1->Location = System::Drawing::Point(0, 7);
+			this->gamnefield_p1->Name = L"gamnefield_p1";
+			this->gamnefield_p1->Size = System::Drawing::Size(462, 381);
+			this->gamnefield_p1->TabIndex = 0;
+			this->gamnefield_p1->TabStop = false;
+			// 
+			// picturebox_D5P1
+			// 
+			this->picturebox_D5P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D5P1->Location = System::Drawing::Point(317, 235);
+			this->picturebox_D5P1->Name = L"picturebox_D5P1";
+			this->picturebox_D5P1->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D5P1->TabIndex = 4;
+			this->picturebox_D5P1->TabStop = false;
+			this->picturebox_D5P1->Visible = false;
+			this->picturebox_D5P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			// 
+			// picturebox_D4P1
+			// 
+			this->picturebox_D4P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D4P1->Location = System::Drawing::Point(56, 252);
+			this->picturebox_D4P1->Name = L"picturebox_D4P1";
+			this->picturebox_D4P1->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D4P1->TabIndex = 3;
+			this->picturebox_D4P1->TabStop = false;
+			this->picturebox_D4P1->Visible = false;
+			this->picturebox_D4P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			// 
+			// picturebox_D3P1
+			// 
+			this->picturebox_D3P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D3P1->Location = System::Drawing::Point(319, 104);
+			this->picturebox_D3P1->Name = L"picturebox_D3P1";
+			this->picturebox_D3P1->Size = System::Drawing::Size(95, 67);
+			this->picturebox_D3P1->TabIndex = 2;
+			this->picturebox_D3P1->TabStop = false;
+			this->picturebox_D3P1->Visible = false;
+			this->picturebox_D3P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			// 
+			// picturebox_D2P1
+			// 
+			this->picturebox_D2P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D2P1->Location = System::Drawing::Point(176, 105);
+			this->picturebox_D2P1->Name = L"picturebox_D2P1";
+			this->picturebox_D2P1->Size = System::Drawing::Size(100, 66);
+			this->picturebox_D2P1->TabIndex = 1;
+			this->picturebox_D2P1->TabStop = false;
+			this->picturebox_D2P1->Visible = false;
+			this->picturebox_D2P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			// 
+			// picturebox_D1P1
+			// 
+			this->picturebox_D1P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D1P1->Location = System::Drawing::Point(37, 106);
+			this->picturebox_D1P1->Name = L"picturebox_D1P1";
+			this->picturebox_D1P1->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D1P1->TabIndex = 0;
+			this->picturebox_D1P1->TabStop = false;
+			this->picturebox_D1P1->Visible = false;
+			this->picturebox_D1P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// panel2
 			// 
@@ -186,167 +293,103 @@ namespace Kosci {
 			this->panel2->Controls->Add(this->button3);
 			this->panel2->Controls->Add(this->gamefield_p2);
 			this->panel2->Location = System::Drawing::Point(462, 28);
-			this->panel2->Name = L"panel_P2";
+			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(462, 661);
 			this->panel2->TabIndex = 2;
 			// 
-			// gamnefield_p1
+			// textBox2
 			// 
-			this->gamnefield_p1->Controls->Add(this->pictureBox5);
-			this->gamnefield_p1->Controls->Add(this->pictureBox4);
-			this->gamnefield_p1->Controls->Add(this->pictureBox3);
-			this->gamnefield_p1->Controls->Add(this->pictureBox2);
-			this->gamnefield_p1->Controls->Add(this->pictureBox1);
-			this->gamnefield_p1->Location = System::Drawing::Point(0, 7);
-			this->gamnefield_p1->Name = L"gamnefield_p1";
-			this->gamnefield_p1->Size = System::Drawing::Size(462, 381);
-			this->gamnefield_p1->TabIndex = 0;
-			this->gamnefield_p1->TabStop = false;
+			this->textBox2->Location = System::Drawing::Point(33, 490);
+			this->textBox2->Multiline = true;
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(357, 162);
+			this->textBox2->TabIndex = 4;
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(315, 435);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->TabIndex = 2;
+			this->button4->Text = L"Nastepna tura";
+			this->button4->UseVisualStyleBackColor = true;
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(33, 434);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 1;
+			this->button3->Text = L"Rzucaj";
+			this->button3->UseVisualStyleBackColor = true;
 			// 
 			// gamefield_p2
 			// 
-			this->gamefield_p2->Controls->Add(this->pictureBox10);
-			this->gamefield_p2->Controls->Add(this->pictureBox9);
-			this->gamefield_p2->Controls->Add(this->pictureBox8);
-			this->gamefield_p2->Controls->Add(this->pictureBox7);
-			this->gamefield_p2->Controls->Add(this->pictureBox6);
+			this->gamefield_p2->Controls->Add(this->picturebox_D5P2);
+			this->gamefield_p2->Controls->Add(this->picturebox_D4P2);
+			this->gamefield_p2->Controls->Add(this->picturebox_D3P2);
+			this->gamefield_p2->Controls->Add(this->picturebox_D2P2);
+			this->gamefield_p2->Controls->Add(this->picturebox_D1P2);
 			this->gamefield_p2->Location = System::Drawing::Point(0, 5);
 			this->gamefield_p2->Name = L"gamefield_p2";
 			this->gamefield_p2->Size = System::Drawing::Size(462, 382);
 			this->gamefield_p2->TabIndex = 0;
 			this->gamefield_p2->TabStop = false;
 			// 
-			// button1
+			// picturebox_D5P2
 			// 
-			this->button1->Location = System::Drawing::Point(37, 435);
-			this->button1->Name = L"button_p1Roll";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"Rzucaj";
-			this->button1->UseVisualStyleBackColor = true;
+			this->picturebox_D5P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D5P2->Location = System::Drawing::Point(315, 254);
+			this->picturebox_D5P2->Name = L"picturebox_D5P2";
+			this->picturebox_D5P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D5P2->TabIndex = 4;
+			this->picturebox_D5P2->TabStop = false;
+			this->picturebox_D5P2->Visible = false;
+			this->picturebox_D5P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
-			// button2
+			// picturebox_D4P2
 			// 
-			this->button2->Location = System::Drawing::Point(319, 435);
-			this->button2->Name = L"button_p1Turn";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 2;
-			this->button2->Text = L"Nastepna tura";
-			this->button2->UseVisualStyleBackColor = true;
+			this->picturebox_D4P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D4P2->Location = System::Drawing::Point(76, 254);
+			this->picturebox_D4P2->Name = L"picturebox_D4P2";
+			this->picturebox_D4P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D4P2->TabIndex = 3;
+			this->picturebox_D4P2->TabStop = false;
+			this->picturebox_D4P2->Visible = false;
+			this->picturebox_D4P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
-			// textBox1
+			// picturebox_D3P2
 			// 
-			this->textBox1->Location = System::Drawing::Point(37, 490);
-			this->textBox1->Multiline = true;
-			this->textBox1->Name = L"textbox_p1Score";
-			this->textBox1->Size = System::Drawing::Size(357, 162);
-			this->textBox1->TabIndex = 3;
+			this->picturebox_D3P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D3P2->Location = System::Drawing::Point(342, 108);
+			this->picturebox_D3P2->Name = L"picturebox_D3P2";
+			this->picturebox_D3P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D3P2->TabIndex = 2;
+			this->picturebox_D3P2->TabStop = false;
+			this->picturebox_D3P2->Visible = false;
+			this->picturebox_D3P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
-			// button3
+			// picturebox_D2P2
 			// 
-			this->button3->Location = System::Drawing::Point(33, 434);
-			this->button3->Name = L"button_p2Roll";
-			this->button3->Size = System::Drawing::Size(75, 23);
-			this->button3->TabIndex = 1;
-			this->button3->Text = L"Rzucaj";
-			this->button3->UseVisualStyleBackColor = true;
+			this->picturebox_D2P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D2P2->Location = System::Drawing::Point(219, 107);
+			this->picturebox_D2P2->Name = L"picturebox_D2P2";
+			this->picturebox_D2P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D2P2->TabIndex = 1;
+			this->picturebox_D2P2->TabStop = false;
+			this->picturebox_D2P2->Visible = false;
+			this->picturebox_D2P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
-			// button4
+			// picturebox_D1P2
 			// 
-			this->button4->Location = System::Drawing::Point(315, 435);
-			this->button4->Name = L"button_p2Turn";
-			this->button4->Size = System::Drawing::Size(75, 23);
-			this->button4->TabIndex = 2;
-			this->button4->Text = L"Nastepna tura";
-			this->button4->UseVisualStyleBackColor = true;
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(33, 490);
-			this->textBox2->Multiline = true;
-			this->textBox2->Name = L"texbox_p2Score";
-			this->textBox2->Size = System::Drawing::Size(357, 162);
-			this->textBox2->TabIndex = 4;
-			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->Location = System::Drawing::Point(37, 106);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(100, 50);
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
-			// 
-			// pictureBox2
-			// 
-			this->pictureBox2->Location = System::Drawing::Point(176, 105);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(100, 50);
-			this->pictureBox2->TabIndex = 1;
-			this->pictureBox2->TabStop = false;
-			// 
-			// pictureBox3
-			// 
-			this->pictureBox3->Location = System::Drawing::Point(319, 104);
-			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(100, 50);
-			this->pictureBox3->TabIndex = 2;
-			this->pictureBox3->TabStop = false;
-			// 
-			// pictureBox4
-			// 
-			this->pictureBox4->Location = System::Drawing::Point(56, 252);
-			this->pictureBox4->Name = L"pictureBox4";
-			this->pictureBox4->Size = System::Drawing::Size(100, 50);
-			this->pictureBox4->TabIndex = 3;
-			this->pictureBox4->TabStop = false;
-			// 
-			// pictureBox5
-			// 
-			this->pictureBox5->Location = System::Drawing::Point(294, 252);
-			this->pictureBox5->Name = L"pictureBox5";
-			this->pictureBox5->Size = System::Drawing::Size(100, 50);
-			this->pictureBox5->TabIndex = 4;
-			this->pictureBox5->TabStop = false;
-			// 
-			// pictureBox6
-			// 
-			this->pictureBox6->Location = System::Drawing::Point(52, 106);
-			this->pictureBox6->Name = L"pictureBox6";
-			this->pictureBox6->Size = System::Drawing::Size(100, 50);
-			this->pictureBox6->TabIndex = 0;
-			this->pictureBox6->TabStop = false;
-			// 
-			// pictureBox7
-			// 
-			this->pictureBox7->Location = System::Drawing::Point(219, 107);
-			this->pictureBox7->Name = L"pictureBox7";
-			this->pictureBox7->Size = System::Drawing::Size(100, 50);
-			this->pictureBox7->TabIndex = 1;
-			this->pictureBox7->TabStop = false;
-			// 
-			// pictureBox8
-			// 
-			this->pictureBox8->Location = System::Drawing::Point(342, 108);
-			this->pictureBox8->Name = L"pictureBox8";
-			this->pictureBox8->Size = System::Drawing::Size(100, 50);
-			this->pictureBox8->TabIndex = 2;
-			this->pictureBox8->TabStop = false;
-			// 
-			// pictureBox9
-			// 
-			this->pictureBox9->Location = System::Drawing::Point(76, 254);
-			this->pictureBox9->Name = L"pictureBox9";
-			this->pictureBox9->Size = System::Drawing::Size(100, 50);
-			this->pictureBox9->TabIndex = 3;
-			this->pictureBox9->TabStop = false;
-			// 
-			// pictureBox10
-			// 
-			this->pictureBox10->Location = System::Drawing::Point(315, 254);
-			this->pictureBox10->Name = L"pictureBox10";
-			this->pictureBox10->Size = System::Drawing::Size(100, 50);
-			this->pictureBox10->TabIndex = 4;
-			this->pictureBox10->TabStop = false;
+			this->picturebox_D1P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->picturebox_D1P2->Location = System::Drawing::Point(52, 106);
+			this->picturebox_D1P2->Name = L"picturebox_D1P2";
+			this->picturebox_D1P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D1P2->TabIndex = 0;
+			this->picturebox_D1P2->TabStop = false;
+			this->picturebox_D1P2->Visible = false;
+			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// Main
 			// 
@@ -363,20 +406,20 @@ namespace Kosci {
 			this->menuStrip1->PerformLayout();
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			this->gamnefield_p1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D5P1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D4P1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D3P1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D2P1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D1P1))->EndInit();
 			this->panel2->ResumeLayout(false);
 			this->panel2->PerformLayout();
-			this->gamnefield_p1->ResumeLayout(false);
 			this->gamefield_p2->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox7))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox8))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox9))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox10))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D5P2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D4P2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D3P2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D2P2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D1P2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -392,19 +435,46 @@ namespace Kosci {
 			delete aboutWindow;
 		}
 	}
-private: System::Void nowaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		
-	System::String^ p1Name;
-	System::String^ p2Name;
+	private: System::Void nowaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	int maxTurns = 3;
-	int maxRolls = 2;
+		System::String^ p1Name;
+		System::String^ p2Name;
 
-	startWindow = gcnew StartWindow();
-	startWindow->Show();
+		int maxTurns = 3;
+		int maxRolls = 2;
+
+		startWindow = gcnew StartWindow();
+		startWindow->Show();
 
 		//here get values for player names, max turns and max re-rolls
-	//game = new Game("Mihau", "Ala");
+		//game = new Game("Mihau", "Ala");
+	}
+
+	private: System::Void InitializeTextures() {
+		if (dicePictures != nullptr) {
+			int index = 0;
+			for each (System::String ^ f in System::IO::Directory::GetFiles("Resources\\Bitmaps\\"))
+			{
+				this->dicePictures[index] = gcnew System::Drawing::Bitmap(f);
+				index++;
+			}
+		}
+		else {
+			throw gcnew System::NullReferenceException();
+		}
+	}
+	private: System::Void picturebox_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->textBox1->Text = ((PictureBox^)sender)->Name;
+		
+	}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	for each (System::Object^ p in this->gamnefield_p1->Controls)
+	{
+		if (p->GetType() == PictureBox::typeid) {
+			((PictureBox^)p)->Visible = true;
+			((PictureBox^)p)->Image = dicePictures[1];
+		}
+	}
 }
 };
 }
