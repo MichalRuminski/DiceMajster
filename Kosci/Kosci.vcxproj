@@ -143,12 +143,13 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutWindow.h" >
-    <FileType>CppForm</FileType>
+    <ClInclude Include="AboutWindow.h">
+      <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Main.h" >
-    <FileType>CppForm</FileType>
+    <ClInclude Include="IndexTag.h" />
+    <ClInclude Include="Main.h">
+      <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="AboutWindow.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="IndexTag.cpp" />
     <ClCompile Include="KosciProj.cpp" />
     <ClCompile Include="Form1.cpp" />
     <ClCompile Include="Game.cpp" />
