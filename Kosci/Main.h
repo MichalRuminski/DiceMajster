@@ -2,9 +2,12 @@
 #include "AboutWindow.h"
 #include "StartWindow.h"
 #include "Game.h"
+#include "IndexTag.h"
 #include<msclr\marshal_cppstd.h>
 
+
 namespace Kosci {
+	
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -21,6 +24,7 @@ namespace Kosci {
 	public:
 		Main(void)
 		{
+			game = new Game("hello", "world");
 			dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
 			InitializeTextures();
 			InitializeComponent();
@@ -240,6 +244,7 @@ namespace Kosci {
 			this->picturebox_D5P1->TabIndex = 4;
 			this->picturebox_D5P1->TabStop = false;
 			this->picturebox_D5P1->Visible = false;
+			this->picturebox_D5P1->Tag = gcnew IndexTag(4);
 			this->picturebox_D5P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D4P1
@@ -251,6 +256,7 @@ namespace Kosci {
 			this->picturebox_D4P1->TabIndex = 3;
 			this->picturebox_D4P1->TabStop = false;
 			this->picturebox_D4P1->Visible = false;
+			this->picturebox_D4P1->Tag = gcnew IndexTag(3);
 			this->picturebox_D4P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D3P1
@@ -262,6 +268,7 @@ namespace Kosci {
 			this->picturebox_D3P1->TabIndex = 2;
 			this->picturebox_D3P1->TabStop = false;
 			this->picturebox_D3P1->Visible = false;
+			this->picturebox_D3P1->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D2P1
@@ -273,6 +280,7 @@ namespace Kosci {
 			this->picturebox_D2P1->TabIndex = 1;
 			this->picturebox_D2P1->TabStop = false;
 			this->picturebox_D2P1->Visible = false;
+			this->picturebox_D2P1->Tag = gcnew IndexTag(1);
 			this->picturebox_D2P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D1P1
@@ -283,6 +291,7 @@ namespace Kosci {
 			this->picturebox_D1P1->Size = System::Drawing::Size(97, 67);
 			this->picturebox_D1P1->TabIndex = 0;
 			this->picturebox_D1P1->TabStop = false;
+			this->picturebox_D1P1->Tag = gcnew IndexTag(0);
 			this->picturebox_D1P1->Visible = false;
 			this->picturebox_D1P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
@@ -345,6 +354,7 @@ namespace Kosci {
 			this->picturebox_D5P2->TabIndex = 4;
 			this->picturebox_D5P2->TabStop = false;
 			this->picturebox_D5P2->Visible = false;
+			this->picturebox_D5P2->Tag = gcnew IndexTag(4);
 			this->picturebox_D5P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D4P2
@@ -356,6 +366,7 @@ namespace Kosci {
 			this->picturebox_D4P2->TabIndex = 3;
 			this->picturebox_D4P2->TabStop = false;
 			this->picturebox_D4P2->Visible = false;
+			this->picturebox_D4P2->Tag = gcnew IndexTag(3);
 			this->picturebox_D4P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D3P2
@@ -367,6 +378,7 @@ namespace Kosci {
 			this->picturebox_D3P2->TabIndex = 2;
 			this->picturebox_D3P2->TabStop = false;
 			this->picturebox_D3P2->Visible = false;
+			this->picturebox_D3P2->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D2P2
@@ -378,6 +390,7 @@ namespace Kosci {
 			this->picturebox_D2P2->TabIndex = 1;
 			this->picturebox_D2P2->TabStop = false;
 			this->picturebox_D2P2->Visible = false;
+			this->picturebox_D2P2->Tag = gcnew IndexTag(1);
 			this->picturebox_D2P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// picturebox_D1P2
@@ -389,6 +402,7 @@ namespace Kosci {
 			this->picturebox_D1P2->TabIndex = 0;
 			this->picturebox_D1P2->TabStop = false;
 			this->picturebox_D1P2->Visible = false;
+			this->picturebox_D1P2->Tag = gcnew IndexTag(0);
 			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
 			// 
 			// Main
@@ -446,8 +460,12 @@ namespace Kosci {
 		startWindow = gcnew StartWindow();
 		startWindow->Show();
 
-		//here get values for player names, max turns and max re-rolls
+		//here get values for player names, max turns and max re-rolls from start window
 		//game = new Game("Mihau", "Ala");
+		if (this->game) {
+			delete game;
+		}
+		game = new Game("Hello", "World");
 	}
 
 	private: System::Void InitializeTextures() {
@@ -473,7 +491,15 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		if (p->GetType() == PictureBox::typeid) {
 			if (!((PictureBox^)p)->Visible) {
 				((PictureBox^)p)->Visible = true;
-				((PictureBox^)p)->Image = dicePictures[this->game->getDiceValue(0) - 1];
+			}
+			IndexTag^ tag = (IndexTag^)((PictureBox^)p)->Tag;
+			int index = tag->getIndex();
+			int value = this->game->getDiceValue(0, index);
+			if (value > 0) {
+				((PictureBox^)p)->Image = dicePictures[value - 1];
+			}
+			else {
+				((PictureBox^)p)->Image = dicePictures[1];
 			}
 		}
 	}
