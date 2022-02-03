@@ -4,9 +4,11 @@
 #include <cstdlib>
 #include <vector>
 #include <numeric>
+#include <time.h>
 
 
 Game::Game(std::string p1Name, std::string p2Name, int nTurns, int mRerolls) {
+	srand(time(NULL));
 	numberOfTurns = nTurns;
 	maxRerolls = mRerolls;
 	currentPlayer1Reroll = currentPlayer2Reroll = 0;
