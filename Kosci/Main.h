@@ -240,7 +240,7 @@ namespace Kosci {
 			this->picturebox_D5P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D5P1->Location = System::Drawing::Point(317, 235);
 			this->picturebox_D5P1->Name = L"picturebox_D5P1";
-			this->picturebox_D5P1->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D5P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D5P1->TabIndex = 4;
 			this->picturebox_D5P1->TabStop = false;
 			this->picturebox_D5P1->Visible = false;
@@ -252,7 +252,7 @@ namespace Kosci {
 			this->picturebox_D4P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D4P1->Location = System::Drawing::Point(56, 252);
 			this->picturebox_D4P1->Name = L"picturebox_D4P1";
-			this->picturebox_D4P1->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D4P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D4P1->TabIndex = 3;
 			this->picturebox_D4P1->TabStop = false;
 			this->picturebox_D4P1->Visible = false;
@@ -264,7 +264,7 @@ namespace Kosci {
 			this->picturebox_D3P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D3P1->Location = System::Drawing::Point(319, 104);
 			this->picturebox_D3P1->Name = L"picturebox_D3P1";
-			this->picturebox_D3P1->Size = System::Drawing::Size(95, 67);
+			this->picturebox_D3P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D3P1->TabIndex = 2;
 			this->picturebox_D3P1->TabStop = false;
 			this->picturebox_D3P1->Visible = false;
@@ -276,7 +276,7 @@ namespace Kosci {
 			this->picturebox_D2P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D2P1->Location = System::Drawing::Point(176, 105);
 			this->picturebox_D2P1->Name = L"picturebox_D2P1";
-			this->picturebox_D2P1->Size = System::Drawing::Size(100, 66);
+			this->picturebox_D2P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D2P1->TabIndex = 1;
 			this->picturebox_D2P1->TabStop = false;
 			this->picturebox_D2P1->Visible = false;
@@ -288,7 +288,7 @@ namespace Kosci {
 			this->picturebox_D1P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D1P1->Location = System::Drawing::Point(37, 106);
 			this->picturebox_D1P1->Name = L"picturebox_D1P1";
-			this->picturebox_D1P1->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D1P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D1P1->TabIndex = 0;
 			this->picturebox_D1P1->TabStop = false;
 			this->picturebox_D1P1->Tag = gcnew IndexTag(0);
@@ -350,7 +350,7 @@ namespace Kosci {
 			this->picturebox_D5P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D5P2->Location = System::Drawing::Point(315, 254);
 			this->picturebox_D5P2->Name = L"picturebox_D5P2";
-			this->picturebox_D5P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D5P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D5P2->TabIndex = 4;
 			this->picturebox_D5P2->TabStop = false;
 			this->picturebox_D5P2->Visible = false;
@@ -362,7 +362,7 @@ namespace Kosci {
 			this->picturebox_D4P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D4P2->Location = System::Drawing::Point(76, 254);
 			this->picturebox_D4P2->Name = L"picturebox_D4P2";
-			this->picturebox_D4P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D4P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D4P2->TabIndex = 3;
 			this->picturebox_D4P2->TabStop = false;
 			this->picturebox_D4P2->Visible = false;
@@ -374,7 +374,7 @@ namespace Kosci {
 			this->picturebox_D3P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D3P2->Location = System::Drawing::Point(342, 108);
 			this->picturebox_D3P2->Name = L"picturebox_D3P2";
-			this->picturebox_D3P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D3P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D3P2->TabIndex = 2;
 			this->picturebox_D3P2->TabStop = false;
 			this->picturebox_D3P2->Visible = false;
@@ -386,7 +386,7 @@ namespace Kosci {
 			this->picturebox_D2P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D2P2->Location = System::Drawing::Point(219, 107);
 			this->picturebox_D2P2->Name = L"picturebox_D2P2";
-			this->picturebox_D2P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D2P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D2P2->TabIndex = 1;
 			this->picturebox_D2P2->TabStop = false;
 			this->picturebox_D2P2->Visible = false;
@@ -398,7 +398,7 @@ namespace Kosci {
 			this->picturebox_D1P2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->picturebox_D1P2->Location = System::Drawing::Point(52, 106);
 			this->picturebox_D1P2->Name = L"picturebox_D1P2";
-			this->picturebox_D1P2->Size = System::Drawing::Size(97, 67);
+			this->picturebox_D1P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D1P2->TabIndex = 0;
 			this->picturebox_D1P2->TabStop = false;
 			this->picturebox_D1P2->Visible = false;
@@ -486,6 +486,7 @@ namespace Kosci {
 		
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	game->rollDices(0);
 	for each (System::Object^ p in this->gamnefield_p1->Controls)
 	{
 		if (p->GetType() == PictureBox::typeid) {
