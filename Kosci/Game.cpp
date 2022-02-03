@@ -1,10 +1,12 @@
 #include "pch.h"
 #include "Game.h"
-
+#include <algorithm>
 #include <cstdlib>
+#include <vector>
+#include <numeric>
 
 
-Game::Game(const char* p1Name, const char* player2Name, int nTurns, int mRerolls) {
+Game::Game(std::string p1Name, std::string p2Name, int nTurns, int mRerolls) {
 	numberOfTurns = nTurns;
 	maxRerolls = mRerolls;
 	currentPlayer1Reroll = currentPlayer2Reroll = 0;
@@ -73,7 +75,7 @@ void Game::selectDice(int pNumber, int index) {
 
 int Game::getDiceValue(int pNumber, int index)
 {
-	if(pNumber)
+	if (pNumber)
 	{
 		return this->player2Dices[index];
 	}
@@ -88,29 +90,52 @@ int Game::getDiceValue(int pNumber, int index)
 int  Game::calculateScore(int pNumber) {
 
 	throw std::exception();
-	//int numberOfValues[6] = { 0,0,0,0,0,0 };
+	bool contains_double = false;
+	bool contains_threes = false;
+	int numInSeq = 0;
+	//sort array, and check if current val is same as next, if not, check if difference is smaller than 1;
+	std::vector<int> values;
+	if (pNumber) {
+		values = std::vector<int>(this->player2Dices, this->player2Dices + 5);
+	}
+	else {
+		values = std::vector<int>(this->player1Dices, this->player1Dices + 5);
+	}
+	std::sort(values.begin(), values.end());
 
-	//int indexOf2 = 0;
-	//int indexOf3 = 0;
-	//int indexOf4 = 0;
-	//int indexOf5 = 0;
+	int prevVal = values[0];
+	for (int i = 1; i < 5; i++) {
+		if (prevVal == values[i] && contains_double) {
+			contains_threes = true;
+			contains_double = false;
+		}
+		else if (prevVal == values[i] && !contains_double) {
+			contains_double = true;
+		}
+		else if (/*prevVal != values[i] && */(values[i] - prevVal) == 1) {
+			numInSeq++;
+		}
+		prevVal = values[i];
+	}
 
-	//int val;
-	////check for ones, twos, threes, etc
-	//for (int i = 0; i < 5; i++) {
-	//	val = dices[i].getCurrentValue();
-	//	numberOfValues[val - 1]++;
-	//}
-	//for (int i = 0; i < 5; i++) {
-	//	if (numberOfValues[i] == 2) {
-	//		indexOf2 = i;
-	//	}
-	//	else if (numberOfValues[i] == 3)
-	//		indexOf3 = i;
-	//	else if (numberOfValues[i] == 4)
-	//		indexOf4 = i;
-	//	else if (numberOfValues[i] == 5)
-	//		indexOf5 = i;
+	if (contains_double) {
+		return 10;
+	}
+	else if (contains_double && contains_threes) {
+		return 30;
+	}
+	else if (contains_threes) {
+		return 20;
+	}
+	else if (numInSeq == 4) {
+		return 40;
+	}
+	else if (numInSeq == 5) {
+		return 50;
+	}
+	
+	int sum = 0;
+	return std::accumulate(values.begin(), values.end(), sum);
 	//}
 
 	////set values of simple combinations

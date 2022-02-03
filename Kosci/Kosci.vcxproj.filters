@@ -58,9 +58,6 @@
     <ClCompile Include="AboutWindow.cpp">
       <Filter>Headerdateien</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Headerdateien</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Headerdateien</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
       <Filter>Headerdateien</Filter>
     </ClCompile>
     <ClCompile Include="IndexTag.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

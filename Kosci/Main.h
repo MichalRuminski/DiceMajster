@@ -451,8 +451,8 @@ namespace Kosci {
 	}
 	private: System::Void nowaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		System::String^ p1Name;
-		System::String^ p2Name;
+		System::String^ p1Name = gcnew System::String(L"Hello");
+		System::String^ p2Name = gcnew System::String(L"World");
 
 		int maxTurns = 3;
 		int maxRolls = 2;
@@ -465,7 +465,7 @@ namespace Kosci {
 		if (this->game) {
 			delete game;
 		}
-		game = new Game("Hello", "World");
+		game = new Game(marshal_as<std::string>(p1Name), marshal_as<std::string>(p2Name));
 	}
 
 	private: System::Void InitializeTextures() {

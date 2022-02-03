@@ -13,7 +13,7 @@ public:
 	//void RollDices(int playerN);	//set random values to dicesc in array of player: playerN;
 	//void SelectDice(int index);
 	//int* GetDiceValues(int playerN);
-	Game(const char* p1Name, const char* player2Name, int nTurns = 3, int mRerolls = 2);
+	Game(std::string p1Name, std::string p2Name, int nTurns = 3, int mRerolls = 2);
 	// Game();
 	~Game();
 
