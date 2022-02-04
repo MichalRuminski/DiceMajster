@@ -19,6 +19,8 @@ public:
 	int  getDiceValue(int pNumber, int index);		// returns value of dice for player:pNumber at index:index
 	int calculateScore(int pNumber); //returns points for player pNumber dices// check for combinations  if none present return sum of all values
 	void endTurn(int pNumber);
+	int getAvailableRerols(int pNumber);
+	int getCurrentTurn(int pNumber);
 	bool gameOver();
 private:
 	bool areValuesSmallSequance(int* val);

@@ -12,7 +12,7 @@ Game::Game(std::string p1Name, std::string p2Name, int nTurns, int mRerolls) {
 	numberOfTurns = nTurns;
 	maxRerolls = mRerolls;
 	availablePlayer1Reroll = availablePlayer2Reroll = maxRerolls;
-	totalPointsP1 = totalPointsP2 = 0;
+	totalPointsP1 = totalPointsP2 = currentTurnP1 = currentTurnP2 = 0;
 	player1Dices = new int[5];
 	player1SelectedDices = new int[5];
 	player2Dices = new int[5];
@@ -133,46 +133,26 @@ int  Game::calculateScore(int pNumber) {
 		prevVal = values[i];
 	}
 
-	if (contains_double) {
-		return 10;
+	if (numInSeq < 3) {
+		if (contains_double && contains_threes) {
+			return 30;
+		}
+		else if (contains_double) {
+			return 10;
+		}
+		else if (contains_threes) {
+			return 20;
+		}
 	}
-	else if (contains_double && contains_threes) {
-		return 30;
-	}
-	else if (contains_threes) {
-		return 20;
-	}
-	else if (numInSeq == 4) {
+	else if (numInSeq == 3) {
 		return 40;
 	}
-	else if (numInSeq == 5) {
+	else if (numInSeq == 4) {
 		return 50;
 	}
 	
 	int sum = 0;
 	return std::accumulate(values.begin(), values.end(), sum);
-	//}
-
-	////set values of simple combinations
-	//possiblePoints[0] = 1 * (numberOfValues[0]);
-	//possiblePoints[1] = 2 * (numberOfValues[1]);
-	//possiblePoints[2] = 3 * (numberOfValues[2]);
-	//possiblePoints[3] = 4 * (numberOfValues[3]);
-	//possiblePoints[4] = 5 * (numberOfValues[4]);
-	//possiblePoints[5] = 6 * (numberOfValues[5]);
-
-	////multiple values
-	//possiblePoints[6] = indexOf3 ? numberOfValues[indexOf3] * (indexOf3 + 1) : 0;
-	//possiblePoints[7] = indexOf4 ? numberOfValues[indexOf4] * (indexOf4 + 1) : 0;
-	//possiblePoints[8] = indexOf5 ? numberOfValues[indexOf5] * (indexOf5 + 1) : 0;
-	//possiblePoints[9] = indexOf3 ? numberOfValues[indexOf3] * (indexOf3 + 1) +
-	//	numberOfValues[indexOf2] * (indexOf2 + 1) : 0;
-	//possiblePoints[10] = areValuesSmallSequance(numberOfValues) ? 40 : 0;
-	//possiblePoints[11] = areValuesLargeSequance(numberOfValues) ? 60 : 0;
-	//possiblePoints[12] = numberOfValues[0] + (numberOfValues[1] * 2)
-	//	+ (numberOfValues[2] * 3) + (numberOfValues[3] * 4)
-	//	+ (numberOfValues[4] * 5) + (numberOfValues[5] * 6);
-
 }
 
 void Game::endTurn(int pNumber)
@@ -187,6 +167,23 @@ void Game::endTurn(int pNumber)
 		this->availablePlayer1Reroll = this->maxRerolls;
 		this->totalPointsP1 += this->calculateScore(pNumber);
 	}
+}
+
+int Game::getAvailableRerols(int pNumber)
+{
+	if (pNumber)
+		return this->availablePlayer2Reroll;
+	else
+		return this->availablePlayer1Reroll;
+}
+
+int Game::getCurrentTurn(int pNumber)
+{
+	if (pNumber) {
+		return this->currentTurnP2;
+	}
+	else
+		return this->currentTurnP1;
 }
 
 bool Game::gameOver()
