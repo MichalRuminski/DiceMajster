@@ -482,8 +482,20 @@ namespace Kosci {
 		}
 	}
 	private: System::Void picturebox_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->textBox1->Text = ((PictureBox^)sender)->Name;
+		int pNumber;
+		if (((PictureBox^)sender)->Parent->Name == "gamefield_p1") {
+			pNumber = 0;
+		}
+		if (((PictureBox^)sender)->Parent->Name == "gamefield_p2") {
+			pNumber = 1;
+		}
+		if(((PictureBox^)sender)->BorderStyle == System::Windows::Forms::BorderStyle::Fixed3D){
+			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::None;
+		}
+		else
+			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 		
+		game->selectDice(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	game->rollDices(0);

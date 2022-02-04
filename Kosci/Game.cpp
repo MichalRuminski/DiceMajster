@@ -42,6 +42,9 @@ void Game::rollDices(int pNumber) {
 				player2Dices[i] = rand() % 6 + 1;
 			}
 		}
+		for (int i = 0; i < 5; i++) {
+			player1SelectedDices[i] = 0;
+		}
 	}
 	else {
 		for (int i = 0; i < 5; i++) {
@@ -49,8 +52,11 @@ void Game::rollDices(int pNumber) {
 				player1Dices[i] = rand() % 6 + 1;
 			}
 		}
+		for (int i = 0; i < 5; i++) {
+			player1SelectedDices[i] = 0;
+		}
 	}
-	//TODO:(Mihau) clear selection on dices here;
+	
 
 }
 
