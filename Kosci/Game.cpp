@@ -12,7 +12,7 @@ Game::Game(std::string p1Name, std::string p2Name, int nTurns, int mRerolls) {
 	numberOfTurns = nTurns;
 	maxRerolls = mRerolls;
 	availablePlayer1Reroll = availablePlayer2Reroll = maxRerolls;
-
+	totalPointsP1 = totalPointsP2 = 0;
 	player1Dices = new int[5];
 	player1SelectedDices = new int[5];
 	player2Dices = new int[5];
@@ -28,6 +28,7 @@ Game::~Game() {
 	delete[] this->player1SelectedDices;
 	delete[] this->player2SelectedDices;
 }
+
 
 void Game::rollDices(int pNumber) {
 	if (pNumber) {
@@ -55,9 +56,10 @@ void Game::rollDices(int pNumber) {
 			}
 			availablePlayer1Reroll--;
 		}
+		if (availablePlayer1Reroll == 0 || availablePlayer2Reroll == 0) {
+			endTurn(pNumber);
+		}
 	}
-	
-
 }
 
 
@@ -103,7 +105,6 @@ int Game::getDiceValue(int pNumber, int index)
 
 int  Game::calculateScore(int pNumber) {
 
-	throw std::exception();
 	bool contains_double = false;
 	bool contains_threes = false;
 	int numInSeq = 0;
@@ -178,12 +179,19 @@ void Game::endTurn(int pNumber)
 {
 	if (pNumber) {
 		this->currentTurnP2++;
-		availablePlayer2Reroll = maxRerolls;
+		this->availablePlayer2Reroll = this->maxRerolls;
+		this->totalPointsP2 += this->calculateScore(pNumber);
 	}
 	else {
 		this->currentTurnP1++;
-		availablePlayer1Reroll = maxRerolls;
+		this->availablePlayer1Reroll = this->maxRerolls;
+		this->totalPointsP1 += this->calculateScore(pNumber);
 	}
+}
+
+bool Game::gameOver()
+{
+	return(this->currentTurnP1 == this->numberOfTurns && this->currentTurnP2 == this->numberOfTurns);
 }
 
 bool Game::areValuesSmallSequance(int* val) {
