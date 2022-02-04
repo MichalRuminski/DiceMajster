@@ -22,7 +22,6 @@ public:
 	void endTurn(int pNumber);
 	bool gameOver();
 private:
-	void endTurn();									//check if reroll max was met of if 
 	bool areValuesSmallSequance(int* val);
 	bool areValuesLargeSequance(int* val);
 
@@ -34,8 +33,8 @@ private:
 	int currentTurnP1;
 	int currentTurnP2;
 	int maxRerolls;
-	int currentPlayer1Reroll;
-	int currentPlayer2Reroll;
+	int availablePlayer1Reroll;
+	int availablePlayer2Reroll;
 
 	int* player1Dices;
 	int* player1SelectedDices;  //value 1 at index means dice is selected and should not be rerolled

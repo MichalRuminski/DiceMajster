@@ -11,7 +11,7 @@ Game::Game(std::string p1Name, std::string p2Name, int nTurns, int mRerolls) {
 	srand(time(NULL));
 	numberOfTurns = nTurns;
 	maxRerolls = mRerolls;
-	currentPlayer1Reroll = currentPlayer2Reroll = 0;
+	availablePlayer1Reroll = availablePlayer2Reroll = maxRerolls;
 
 	player1Dices = new int[5];
 	player1SelectedDices = new int[5];
@@ -29,31 +29,31 @@ Game::~Game() {
 	delete[] this->player2SelectedDices;
 }
 
-void Game::nextTurn() {
-	//TODO:(Mihau) we need to clear dice selection after new turn, and after re-roll
-	this->currentTurn++;
-
-}
-
 void Game::rollDices(int pNumber) {
 	if (pNumber) {
-		for (int i = 0; i < 5; i++) {
-			if (!player2SelectedDices[i]) {
-				player2Dices[i] = rand() % 6 + 1;
+		if (availablePlayer2Reroll > 0) {
+			for (int i = 0; i < 5; i++) {
+				if (!player2SelectedDices[i]) {
+					player2Dices[i] = rand() % 6 + 1;
+				}
+			}
+			for (int i = 0; i < 5; i++) {
+				player2SelectedDices[i] = 0;
 			}
 		}
-		for (int i = 0; i < 5; i++) {
-			player2SelectedDices[i] = 0;
-		}
+		availablePlayer2Reroll--;
 	}
 	else {
-		for (int i = 0; i < 5; i++) {
-			if (!player1SelectedDices[i]) {
-				player1Dices[i] = rand() % 6 + 1;
+		if (availablePlayer1Reroll > 0) {
+			for (int i = 0; i < 5; i++) {
+				if (!player1SelectedDices[i]) {
+					player1Dices[i] = rand() % 6 + 1;
+				}
 			}
-		}
-		for (int i = 0; i < 5; i++) {
-			player1SelectedDices[i] = 0;
+			for (int i = 0; i < 5; i++) {
+				player1SelectedDices[i] = 0;
+			}
+			availablePlayer1Reroll--;
 		}
 	}
 	
@@ -174,6 +174,18 @@ int  Game::calculateScore(int pNumber) {
 
 }
 
+void Game::endTurn(int pNumber)
+{
+	if (pNumber) {
+		this->currentTurnP2++;
+		availablePlayer2Reroll = maxRerolls;
+	}
+	else {
+		this->currentTurnP1++;
+		availablePlayer1Reroll = maxRerolls;
+	}
+}
+
 bool Game::areValuesSmallSequance(int* val) {
 	if (val[0] && val[1] && val[2] && val[3] || val[1] && val[2] && val[3] && val[4] ||
 		val[2] && val[3] && val[4] && val[5])
@@ -187,18 +199,3 @@ bool Game::areValuesLargeSequance(int* val) {
 		return true;
 	return false;
 }
-
-//Game::Game(const char* p1Name, const char* p2Name, int nTurns, int mRerolls) {
-//
-//	numberOfTurns = nTurns;
-//	maxRerolls = mRerolls;
-//	currentPlayer1Reroll = currentPlayer2Reroll = 0;
-//
-//	player1Dices = new int[5];
-//	player1SelectedDices = new int[5];
-//	player2Dices = new int[5];
-//	player2SelectedDices = new int[5];
-//	for (int i = 0; i < 5; i++) {
-//		player1Dices[i] = player1SelectedDices[i] = player2Dices[i] = player2SelectedDices[i] = 0;
-//	}
-//}
