@@ -9,22 +9,20 @@ class Game
 
 public:
 
-	//int GetScore(int* dices);		//return calculated score,
-	//void RollDices(int playerN);	//set random values to dicesc in array of player: playerN;
-	//void SelectDice(int index);
-	//int* GetDiceValues(int playerN);
+	
 	Game(std::string p1Name, std::string p2Name, int nTurns = 3, int mRerolls = 2);
-	// Game();
 	~Game();
 
 	void nextTurn();
-	void rollDices(int pNumber);
-	void selectDice(int pNumber, int index);
-	int  getDiceValue(int pNumber, int index);
-	void updateScore();
+	void rollDices(int pNumber);					
+	void selectDice(int pNumber, int index);		
+	bool isDiceSelected(int pNumber, int index);	// return true if pNumber dices is set to 1;
+	int  getDiceValue(int pNumber, int index);		// returns value of dice for player:pNumber at index:index
 	int calculateScore(int pNumber); //returns points for player pNumber dices// check for combinations  if none present return sum of all values
+	void endTurn(int pNumber);
 	bool gameOver();
 private:
+	void endTurn();									//check if reroll max was met of if 
 	bool areValuesSmallSequance(int* val);
 	bool areValuesLargeSequance(int* val);
 
@@ -33,7 +31,8 @@ private:
 
 
 	int numberOfTurns;
-	int currentTurn;
+	int currentTurnP1;
+	int currentTurnP2;
 	int maxRerolls;
 	int currentPlayer1Reroll;
 	int currentPlayer2Reroll;

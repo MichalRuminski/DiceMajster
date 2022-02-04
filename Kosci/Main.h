@@ -230,7 +230,7 @@ namespace Kosci {
 			this->gamnefield_p1->Controls->Add(this->picturebox_D2P1);
 			this->gamnefield_p1->Controls->Add(this->picturebox_D1P1);
 			this->gamnefield_p1->Location = System::Drawing::Point(0, 7);
-			this->gamnefield_p1->Name = L"gamnefield_p1";
+			this->gamnefield_p1->Name = L"gamefield_p1";
 			this->gamnefield_p1->Size = System::Drawing::Size(462, 381);
 			this->gamnefield_p1->TabIndex = 0;
 			this->gamnefield_p1->TabStop = false;
@@ -482,20 +482,23 @@ namespace Kosci {
 		}
 	}
 	private: System::Void picturebox_Click(System::Object^ sender, System::EventArgs^ e) {
-		int pNumber;
+		int pNumber = 0;
 		if (((PictureBox^)sender)->Parent->Name == "gamefield_p1") {
 			pNumber = 0;
 		}
 		if (((PictureBox^)sender)->Parent->Name == "gamefield_p2") {
 			pNumber = 1;
 		}
-		if(((PictureBox^)sender)->BorderStyle == System::Windows::Forms::BorderStyle::Fixed3D){
+			game->selectDice(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
+
+		if (game->isDiceSelected(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex())){
+			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+		}
+		else {
 			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::None;
 		}
-		else
-			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 		
-		game->selectDice(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
+		
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	game->rollDices(0);
@@ -514,8 +517,16 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			else {
 				((PictureBox^)p)->Image = dicePictures[1];
 			}
+			if (game->isDiceSelected(0, ((IndexTag^)((PictureBox^)p)->Tag)->getIndex())) {
+				((PictureBox^)p)->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			}
+			else {
+				((PictureBox^)p)->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			}
 		}
 	}
+	
+	
 }
 };
 }

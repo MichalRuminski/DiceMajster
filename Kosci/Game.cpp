@@ -43,7 +43,7 @@ void Game::rollDices(int pNumber) {
 			}
 		}
 		for (int i = 0; i < 5; i++) {
-			player1SelectedDices[i] = 0;
+			player2SelectedDices[i] = 0;
 		}
 	}
 	else {
@@ -71,14 +71,20 @@ void Game::selectDice(int pNumber, int index) {
 			player2SelectedDices[index] = 1;
 	}
 	else {
-		if (this->player2SelectedDices[index]) {
-			player2SelectedDices[index] = 0;
+		if (this->player1SelectedDices[index]) {
+			player1SelectedDices[index] = 0;
 		}
 		else
-			player2SelectedDices[index] = 1;
+			player1SelectedDices[index] = 1;
 	}
+}
 
-
+bool Game::isDiceSelected(int pNumber, int index) {
+	if (pNumber) {
+		return this->player2SelectedDices[index];
+	}
+	else
+		return this->player1SelectedDices[index];
 }
 
 int Game::getDiceValue(int pNumber, int index)
