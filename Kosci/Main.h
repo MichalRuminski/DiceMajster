@@ -21,6 +21,7 @@ namespace Kosci {
 
 	public ref class Main : public System::Windows::Forms::Form
 	{
+		//konstruktor parametryczny
 	public:
 		Main(void)
 		{
