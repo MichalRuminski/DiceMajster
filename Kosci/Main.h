@@ -1,6 +1,6 @@
 #pragma once
 #include "AboutWindow.h"
-#include "StartWindow.h"
+//#include "StartWindow.h"
 #include "Game.h"
 #include "IndexTag.h"
 #include<msclr\marshal_cppstd.h>
@@ -22,6 +22,12 @@ namespace Kosci {
 	public ref class Main : public System::Windows::Forms::Form
 	{
 		//konstruktor parametryczny
+	public: Main(Game* g) {
+		game = g;
+		dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
+		InitializeTextures();
+		InitializeComponent();
+	}
 	public:
 		Main(void)
 		{
@@ -47,7 +53,7 @@ namespace Kosci {
 		}
 
 	private: AboutWindow^ aboutWindow;
-	private: StartWindow^ startWindow;
+	//private: StartWindow^ startWindow;
 	private: array<System::Drawing::Bitmap^>^ dicePictures;
 
 	private: Game* game;
@@ -519,8 +525,8 @@ namespace Kosci {
 		int maxTurns = 3;
 		int maxRolls = 2;
 
-		startWindow = gcnew StartWindow();
-		startWindow->Show();
+		//startWindow = gcnew StartWindow();
+		//startWindow->Show();
 
 		//here get values for player names, max turns and max re-rolls from start window
 		//game = new Game("Mihau", "Ala");

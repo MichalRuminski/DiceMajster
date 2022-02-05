@@ -1,4 +1,7 @@
 #pragma once
+#include "Game.h"
+#include "Main.h"
+#include<msclr\marshal_cppstd.h>
 
 namespace Kosci {
 
@@ -9,6 +12,7 @@ namespace Kosci {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	using namespace msclr::interop;
 	/// <summary>
 	/// Podsumowanie informacji o StartWindow
 	/// </summary>
@@ -34,6 +38,8 @@ namespace Kosci {
 				delete components;
 			}
 		}
+
+	private: Kosci::Main^ m;
 	private: System::Windows::Forms::Label^ label1;
 	protected:
 	private: System::Windows::Forms::Label^ label2;
@@ -41,6 +47,9 @@ namespace Kosci {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ textBox2;
 
 	private:
 		/// <summary>
@@ -61,6 +70,9 @@ namespace Kosci {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -75,7 +87,7 @@ namespace Kosci {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(65, 160);
+			this->label2->Location = System::Drawing::Point(62, 160);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(35, 13);
 			this->label2->TabIndex = 1;
@@ -102,7 +114,7 @@ namespace Kosci {
 			// comboBox1
 			// 
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(1) { L"3 4 5 6 7 8 9" });
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"2", L"3", L"4", L"5" });
 			this->comboBox1->Location = System::Drawing::Point(107, 228);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(121, 21);
@@ -111,16 +123,44 @@ namespace Kosci {
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"2", L"3", L"4", L"5" });
 			this->comboBox2->Location = System::Drawing::Point(313, 228);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(121, 21);
 			this->comboBox2->TabIndex = 5;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(182, 283);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(168, 54);
+			this->button1->TabIndex = 6;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &StartWindow::button1_Click);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(107, 127);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->TabIndex = 7;
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(107, 152);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(100, 20);
+			this->textBox2->TabIndex = 8;
 			// 
 			// StartWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(572, 407);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->comboBox2);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->label4);
@@ -134,5 +174,20 @@ namespace Kosci {
 
 		}
 #pragma endregion
-	};
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		//create game
+		//create GameWindow (main.h)
+		//show GameWindow and hide this window(dont know if this will work)
+		System::String^ selectedValue1 = (System::String^)(this->comboBox1)->SelectedItem;
+		System::String^ selectedValue2 = (System::String^)(this->comboBox2)->SelectedItem;
+
+		Game* g = new Game(marshal_as<std::string>(this->textBox1->Text), marshal_as<std::string>(this->textBox2->Text));
+
+		m = gcnew Main(g);
+		m->Show();
+		this->Hide();
+		if(m == nullptr)
+			delete g;
+	}
+};
 }

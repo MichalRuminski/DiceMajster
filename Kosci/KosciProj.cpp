@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Main.h"
+#include "StartWindow.h"
 
 using namespace System::Windows::Forms;
 
@@ -7,6 +7,6 @@ using namespace System::Windows::Forms;
 int main() {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	Application::Run(gcnew Kosci::Main()); 
+	Application::Run(gcnew Kosci::StartWindow()); 
 	return 0;
 }
