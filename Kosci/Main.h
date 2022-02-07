@@ -1,13 +1,12 @@
 #pragma once
 #include "AboutWindow.h"
-//#include "StartWindow.h"
 #include "Game.h"
 #include "IndexTag.h"
 #include<msclr\marshal_cppstd.h>
 
 
 namespace Kosci {
-	
+	ref class StartWindow ;
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -22,16 +21,10 @@ namespace Kosci {
 	public ref class Main : public System::Windows::Forms::Form
 	{
 		//konstruktor parametryczny
-	public: Main(Game* g) {
-		game = g;
-		dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
-		InitializeTextures();
-		InitializeComponent();
-	}
+	public: Main(Game* g, StartWindow^ parent);
 	public:
 		Main(void)
 		{
-			game = new Game("hello", "world");
 			dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
 			InitializeTextures();
 			InitializeComponent();
@@ -53,11 +46,12 @@ namespace Kosci {
 		}
 
 	private: AboutWindow^ aboutWindow;
-	//private: StartWindow^ startWindow;
 	private: array<System::Drawing::Bitmap^>^ dicePictures;
 
 	private: Game* game;
-
+	private: StartWindow^ parent;
+	private: void HandleNewGame();
+	private: void HandleClosing();
 
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	protected:
@@ -119,6 +113,7 @@ namespace Kosci {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->gamefield_p1 = (gcnew System::Windows::Forms::GroupBox());
+			this->label_p1Name = (gcnew System::Windows::Forms::Label());
 			this->picturebox_D5P1 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D4P1 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D3P1 = (gcnew System::Windows::Forms::PictureBox());
@@ -134,7 +129,6 @@ namespace Kosci {
 			this->picturebox_D3P2 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D2P2 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D1P2 = (gcnew System::Windows::Forms::PictureBox());
-			this->label_p1Name = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->gamefield_p1->SuspendLayout();
@@ -278,7 +272,7 @@ namespace Kosci {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Main::button1_Click);
 			// 
-			// gamnefield_p1
+			// gamefield_p1
 			// 
 			this->gamefield_p1->Controls->Add(this->label_p1Name);
 			this->gamefield_p1->Controls->Add(this->picturebox_D5P1);
@@ -292,6 +286,14 @@ namespace Kosci {
 			this->gamefield_p1->TabIndex = 0;
 			this->gamefield_p1->TabStop = false;
 			// 
+			// label_p1Name
+			// 
+			this->label_p1Name->AutoSize = true;
+			this->label_p1Name->Location = System::Drawing::Point(176, 20);
+			this->label_p1Name->Name = L"label_p1Name";
+			this->label_p1Name->Size = System::Drawing::Size(0, 13);
+			this->label_p1Name->TabIndex = 5;
+			// 
 			// picturebox_D5P1
 			// 
 			this->picturebox_D5P1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
@@ -299,7 +301,6 @@ namespace Kosci {
 			this->picturebox_D5P1->Name = L"picturebox_D5P1";
 			this->picturebox_D5P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D5P1->TabIndex = 4;
-			this->picturebox_D5P1->Tag = gcnew IndexTag(0);
 			this->picturebox_D5P1->TabStop = false;
 			this->picturebox_D5P1->Visible = false;
 			this->picturebox_D5P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -311,7 +312,6 @@ namespace Kosci {
 			this->picturebox_D4P1->Name = L"picturebox_D4P1";
 			this->picturebox_D4P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D4P1->TabIndex = 3;
-			this->picturebox_D4P1->Tag = gcnew IndexTag(1);
 			this->picturebox_D4P1->TabStop = false;
 			this->picturebox_D4P1->Visible = false;
 			this->picturebox_D4P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -323,7 +323,6 @@ namespace Kosci {
 			this->picturebox_D3P1->Name = L"picturebox_D3P1";
 			this->picturebox_D3P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D3P1->TabIndex = 2;
-			this->picturebox_D3P1->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P1->TabStop = false;
 			this->picturebox_D3P1->Visible = false;
 			this->picturebox_D3P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -335,7 +334,6 @@ namespace Kosci {
 			this->picturebox_D2P1->Name = L"picturebox_D2P1";
 			this->picturebox_D2P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D2P1->TabIndex = 1;
-			this->picturebox_D2P1->Tag = gcnew IndexTag(3);
 			this->picturebox_D2P1->TabStop = false;
 			this->picturebox_D2P1->Visible = false;
 			this->picturebox_D2P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -347,7 +345,6 @@ namespace Kosci {
 			this->picturebox_D1P1->Name = L"picturebox_D1P1";
 			this->picturebox_D1P1->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D1P1->TabIndex = 0;
-			this->picturebox_D1P1->Tag = gcnew IndexTag(4);
 			this->picturebox_D1P1->TabStop = false;
 			this->picturebox_D1P1->Visible = false;
 			this->picturebox_D1P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -373,7 +370,7 @@ namespace Kosci {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(315, 435);
+			this->button4->Location = System::Drawing::Point(315, 394);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(75, 23);
 			this->button4->TabIndex = 2;
@@ -383,7 +380,7 @@ namespace Kosci {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(33, 434);
+			this->button3->Location = System::Drawing::Point(33, 394);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 23);
 			this->button3->TabIndex = 1;
@@ -411,7 +408,6 @@ namespace Kosci {
 			this->picturebox_D5P2->Name = L"picturebox_D5P2";
 			this->picturebox_D5P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D5P2->TabIndex = 4;
-			this->picturebox_D5P2->Tag = gcnew IndexTag(0);
 			this->picturebox_D5P2->TabStop = false;
 			this->picturebox_D5P2->Visible = false;
 			this->picturebox_D5P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -423,7 +419,6 @@ namespace Kosci {
 			this->picturebox_D4P2->Name = L"picturebox_D4P2";
 			this->picturebox_D4P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D4P2->TabIndex = 3;
-			this->picturebox_D4P2->Tag = gcnew IndexTag(1);
 			this->picturebox_D4P2->TabStop = false;
 			this->picturebox_D4P2->Visible = false;
 			this->picturebox_D4P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -435,7 +430,6 @@ namespace Kosci {
 			this->picturebox_D3P2->Name = L"picturebox_D3P2";
 			this->picturebox_D3P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D3P2->TabIndex = 2;
-			this->picturebox_D3P2->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P2->TabStop = false;
 			this->picturebox_D3P2->Visible = false;
 			this->picturebox_D3P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -447,7 +441,6 @@ namespace Kosci {
 			this->picturebox_D2P2->Name = L"picturebox_D2P2";
 			this->picturebox_D2P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D2P2->TabIndex = 1;
-			this->picturebox_D2P2->Tag = gcnew IndexTag(3);
 			this->picturebox_D2P2->TabStop = false;
 			this->picturebox_D2P2->Visible = false;
 			this->picturebox_D2P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
@@ -459,18 +452,9 @@ namespace Kosci {
 			this->picturebox_D1P2->Name = L"picturebox_D1P2";
 			this->picturebox_D1P2->Size = System::Drawing::Size(110, 110);
 			this->picturebox_D1P2->TabIndex = 0;
-			this->picturebox_D1P2->Tag = gcnew IndexTag(4);
 			this->picturebox_D1P2->TabStop = false;
 			this->picturebox_D1P2->Visible = false;
 			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
-			// 
-			// label_p1Name
-			// 
-			this->label_p1Name->AutoSize = true;
-			this->label_p1Name->Location = System::Drawing::Point(176, 20);
-			this->label_p1Name->Name = L"label_p1Name";
-			this->label_p1Name->Size = System::Drawing::Size(0, 13);
-			this->label_p1Name->TabIndex = 5;
 			// 
 			// Main
 			// 
@@ -483,6 +467,7 @@ namespace Kosci {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Main";
 			this->Text = L"Kosci";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Main::Main_FormClosing);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->panel1->ResumeLayout(false);
@@ -518,22 +503,8 @@ namespace Kosci {
 		}
 	}
 	private: System::Void nowaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-
-		System::String^ p1Name = gcnew System::String(L"Hello");
-		System::String^ p2Name = gcnew System::String(L"World");
-
-		int maxTurns = 3;
-		int maxRolls = 2;
-
-		//startWindow = gcnew StartWindow();
-		//startWindow->Show();
-
-		//here get values for player names, max turns and max re-rolls from start window
-		//game = new Game("Mihau", "Ala");
-		if (this->game) {
-			delete game;
-		}
-		game = new Game(marshal_as<std::string>(p1Name), marshal_as<std::string>(p2Name));
+		
+		this->HandleNewGame();
 	}
 
 	private: System::Void InitializeTextures() {
@@ -605,6 +576,9 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void Main_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+	this->HandleClosing();
 }
 };
 }

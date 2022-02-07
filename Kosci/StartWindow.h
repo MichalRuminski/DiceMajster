@@ -169,6 +169,7 @@ namespace Kosci {
 			this->Controls->Add(this->label1);
 			this->Name = L"StartWindow";
 			this->Text = L"StartWindow";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &StartWindow::StartWindow_FormClosing);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -183,11 +184,15 @@ namespace Kosci {
 
 		Game* g = new Game(marshal_as<std::string>(this->textBox1->Text), marshal_as<std::string>(this->textBox2->Text));
 
-		m = gcnew Main(g);
+		m = gcnew Main(g,this);
 		m->Show();
 		this->Hide();
-		if(m == nullptr)
+		if (m == nullptr) {
 			delete g;
+			this->Show();
+		}
 	}
+private: System::Void StartWindow_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+}
 };
 }
