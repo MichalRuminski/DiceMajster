@@ -13,24 +13,16 @@ namespace Kosci {
 	using namespace System::Drawing;
 
 	using namespace msclr::interop;
-	/// <summary>
-	/// Podsumowanie informacji o StartWindow
-	/// </summary>
+	
 	public ref class StartWindow : public System::Windows::Forms::Form
 	{
 	public:
 		StartWindow(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: W tym miejscu dodaj kod konstruktora
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Wyczyœæ wszystkie u¿ywane zasoby.
-		/// </summary>
 		~StartWindow()
 		{
 			if (components)
@@ -52,16 +44,9 @@ namespace Kosci {
 	private: System::Windows::Forms::TextBox^ textBox_p2Name;
 
 	private:
-		/// <summary>
-		/// Wymagana zmienna projektanta.
-		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Metoda wymagana do obs³ugi projektanta — nie nale¿y modyfikowaæ
-		/// jej zawartoœci w edytorze kodu.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->label_p1Name = (gcnew System::Windows::Forms::Label());
