@@ -1,6 +1,6 @@
 #pragma once
 #include "Game.h"
-#include "Main.h"
+#include "GameWindow.h"
 #include<msclr\marshal_cppstd.h>
 
 namespace Kosci {
@@ -39,7 +39,7 @@ namespace Kosci {
 			}
 		}
 
-	private: Kosci::Main^ m;
+	private: Kosci::GameWindow^ m;
 	private: System::Windows::Forms::Label^ label1;
 	protected:
 	private: System::Windows::Forms::Label^ label2;
@@ -184,7 +184,7 @@ namespace Kosci {
 
 		Game* g = new Game(marshal_as<std::string>(this->textBox1->Text), marshal_as<std::string>(this->textBox2->Text));
 
-		m = gcnew Main(g,this);
+		m = gcnew GameWindow(g,this);
 		m->Show();
 		this->Hide();
 		if (m == nullptr) {

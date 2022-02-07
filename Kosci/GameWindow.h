@@ -18,12 +18,12 @@ namespace Kosci {
 	using namespace msclr::interop;
 
 
-	public ref class Main : public System::Windows::Forms::Form
+	public ref class GameWindow : public System::Windows::Forms::Form
 	{
 		//konstruktor parametryczny
-	public: Main(Game* g, StartWindow^ parent);
+	public: GameWindow(Game* g, StartWindow^ parent);
 	public:
-		Main(void)
+		GameWindow(void)
 		{
 			dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
 			InitializeTextures();
@@ -33,7 +33,7 @@ namespace Kosci {
 
 	protected:
 
-		~Main()
+		~GameWindow()
 		{
 			if (components)
 			{
@@ -173,7 +173,7 @@ namespace Kosci {
 			this->nowaToolStripMenuItem->Name = L"nowaToolStripMenuItem";
 			this->nowaToolStripMenuItem->Size = System::Drawing::Size(114, 22);
 			this->nowaToolStripMenuItem->Text = L"Nowa";
-			this->nowaToolStripMenuItem->Click += gcnew System::EventHandler(this, &Main::nowaToolStripMenuItem_Click);
+			this->nowaToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameWindow::nowaToolStripMenuItem_Click);
 			// 
 			// wyjœcieToolStripMenuItem
 			// 
@@ -193,7 +193,7 @@ namespace Kosci {
 			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->aboutToolStripMenuItem->Text = L"About";
-			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &Main::aboutToolStripMenuItem_Click);
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameWindow::aboutToolStripMenuItem_Click);
 			// 
 			// panel1
 			// 
@@ -260,7 +260,7 @@ namespace Kosci {
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"Nastepna tura";
 			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &Main::button2_Click);
+			this->button2->Click += gcnew System::EventHandler(this, &GameWindow::button2_Click);
 			// 
 			// button1
 			// 
@@ -270,7 +270,7 @@ namespace Kosci {
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Rzucaj";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &Main::button1_Click);
+			this->button1->Click += gcnew System::EventHandler(this, &GameWindow::button1_Click);
 			// 
 			// gamefield_p1
 			// 
@@ -303,7 +303,7 @@ namespace Kosci {
 			this->picturebox_D5P1->TabIndex = 4;
 			this->picturebox_D5P1->TabStop = false;
 			this->picturebox_D5P1->Visible = false;
-			this->picturebox_D5P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D5P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D4P1
 			// 
@@ -314,7 +314,7 @@ namespace Kosci {
 			this->picturebox_D4P1->TabIndex = 3;
 			this->picturebox_D4P1->TabStop = false;
 			this->picturebox_D4P1->Visible = false;
-			this->picturebox_D4P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D4P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D3P1
 			// 
@@ -325,7 +325,7 @@ namespace Kosci {
 			this->picturebox_D3P1->TabIndex = 2;
 			this->picturebox_D3P1->TabStop = false;
 			this->picturebox_D3P1->Visible = false;
-			this->picturebox_D3P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D3P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D2P1
 			// 
@@ -336,7 +336,7 @@ namespace Kosci {
 			this->picturebox_D2P1->TabIndex = 1;
 			this->picturebox_D2P1->TabStop = false;
 			this->picturebox_D2P1->Visible = false;
-			this->picturebox_D2P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D2P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D1P1
 			// 
@@ -347,7 +347,7 @@ namespace Kosci {
 			this->picturebox_D1P1->TabIndex = 0;
 			this->picturebox_D1P1->TabStop = false;
 			this->picturebox_D1P1->Visible = false;
-			this->picturebox_D1P1->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D1P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// panel2
 			// 
@@ -376,7 +376,7 @@ namespace Kosci {
 			this->button4->TabIndex = 2;
 			this->button4->Text = L"Nastepna tura";
 			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &Main::button4_Click);
+			this->button4->Click += gcnew System::EventHandler(this, &GameWindow::button4_Click);
 			// 
 			// button3
 			// 
@@ -386,7 +386,7 @@ namespace Kosci {
 			this->button3->TabIndex = 1;
 			this->button3->Text = L"Rzucaj";
 			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &Main::button3_Click);
+			this->button3->Click += gcnew System::EventHandler(this, &GameWindow::button3_Click);
 			// 
 			// gamefield_p2
 			// 
@@ -410,7 +410,7 @@ namespace Kosci {
 			this->picturebox_D5P2->TabIndex = 4;
 			this->picturebox_D5P2->TabStop = false;
 			this->picturebox_D5P2->Visible = false;
-			this->picturebox_D5P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D5P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D4P2
 			// 
@@ -421,7 +421,7 @@ namespace Kosci {
 			this->picturebox_D4P2->TabIndex = 3;
 			this->picturebox_D4P2->TabStop = false;
 			this->picturebox_D4P2->Visible = false;
-			this->picturebox_D4P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D4P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D3P2
 			// 
@@ -432,7 +432,7 @@ namespace Kosci {
 			this->picturebox_D3P2->TabIndex = 2;
 			this->picturebox_D3P2->TabStop = false;
 			this->picturebox_D3P2->Visible = false;
-			this->picturebox_D3P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D3P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D2P2
 			// 
@@ -443,7 +443,7 @@ namespace Kosci {
 			this->picturebox_D2P2->TabIndex = 1;
 			this->picturebox_D2P2->TabStop = false;
 			this->picturebox_D2P2->Visible = false;
-			this->picturebox_D2P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D2P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D1P2
 			// 
@@ -454,7 +454,7 @@ namespace Kosci {
 			this->picturebox_D1P2->TabIndex = 0;
 			this->picturebox_D1P2->TabStop = false;
 			this->picturebox_D1P2->Visible = false;
-			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &Main::picturebox_Click);
+			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// Main
 			// 
@@ -467,7 +467,7 @@ namespace Kosci {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Main";
 			this->Text = L"Kosci";
-			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Main::Main_FormClosing);
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &GameWindow::Main_FormClosing);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->panel1->ResumeLayout(false);

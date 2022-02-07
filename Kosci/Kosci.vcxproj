@@ -148,7 +148,7 @@
     </ClInclude>
     <ClInclude Include="Game.h" />
     <ClInclude Include="IndexTag.h" />
-    <ClInclude Include="Main.h">
+    <ClInclude Include="GameWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="pch.h" />
@@ -164,7 +164,7 @@
     <ClCompile Include="KosciProj.cpp" />
     <ClCompile Include="Form1.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -187,8 +187,8 @@
     <EmbeddedResource Include="AboutWindow.resx">
       <DependentUpon>AboutWindow.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.h</DependentUpon>
+    <EmbeddedResource Include="GameWindow.resx">
+      <DependentUpon>GameWindow.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartWindow.resx">
       <DependentUpon>StartWindow.h</DependentUpon>

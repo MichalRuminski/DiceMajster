@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "StartWindow.h"
-#include "Main.h"
+#include "GameWindow.h"
 
 
 namespace Kosci {
-		Main::Main(Game* g, StartWindow^ parent) {
+		GameWindow::GameWindow(Game* g, StartWindow^ parent) {
 
 		this->parent = parent;
 		this->game = g;
@@ -13,7 +13,7 @@ namespace Kosci {
 		this->InitializeComponent();
 	}
 
-		void Main::HandleNewGame() {
+		void GameWindow::HandleNewGame() {
 			System::Windows::Forms::DialogResult result = MessageBox::Show(gcnew System::String(L"Na pewno zakonczyc aktualna gre?"),
 											gcnew System::String(L"Zakonczyc?"),System::Windows::Forms::MessageBoxButtons::YesNo);
 			if (result == System::Windows::Forms::DialogResult::Yes) {
@@ -22,7 +22,7 @@ namespace Kosci {
 			}
 		}
 
-		void Main::HandleClosing() {
+		void GameWindow::HandleClosing() {
 			parent->Show();
 		}
 }
