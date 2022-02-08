@@ -29,6 +29,9 @@ namespace Kosci {
 			InitializeTextures();
 			InitializeComponent();
 
+			prevWidth = this->Size.Width;
+			prevHeight = this->Size.Height;
+
 		}
 
 	protected:
@@ -54,6 +57,9 @@ namespace Kosci {
 	private: void HandleClosing();
 	private: void HandleRoll(int pNumber);
 	private: void HandleEndTurn(int pNumber);
+
+	private: int prevWidth;
+	private: int prevHeight;
 
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	protected:
@@ -547,6 +553,7 @@ namespace Kosci {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D3P2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D2P2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->picturebox_D1P2))->EndInit();
+			this->Resize += gcnew System::EventHandler(this, &GameWindow::GameWindow_Resize);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -616,5 +623,21 @@ namespace Kosci {
 	}
 	private: System::Void label_curTurnP2_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-};
+
+	private: System::Void GameWindow_Resize(System::Object^ sender, System::EventArgs^ e) {
+		//scale factor
+		float scaleWidth = this->Size.Width / (float)prevWidth;
+		float scaleHeight = this->Size.Height / (float)prevHeight;
+		int newWidth = this->Size.Width * scaleWidth;
+
+		for each (System::Windows::Forms::Control ^ c in this->Controls) {
+
+			c->Scale(scaleWidth, scaleHeight);
+			c->Location.X = c->Location.X * scaleWidth;
+			c->Location.Y = c->Location.Y * scaleHeight;
+		}
+		this->prevWidth = this->Size.Width;
+		this->prevHeight = this->Size.Height;
+	}
+	};
 }

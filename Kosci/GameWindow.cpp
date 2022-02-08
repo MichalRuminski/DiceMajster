@@ -11,6 +11,8 @@ namespace Kosci {
 		this->dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
 		this->InitializeTextures();
 		this->InitializeComponent();
+		this->prevWidth = this->Size.Width;
+		this->prevHeight = this->Size.Height;
 	}
 
 	void GameWindow::HandleNewGame() {
