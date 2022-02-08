@@ -21,7 +21,8 @@ public:
 	void endTurn(int pNumber);
 	int getAvailableRerols(int pNumber);
 	int getCurrentTurn(int pNumber);
-	bool gameOver();
+	int getTotalScore(int pNumber);
+	bool isGameOver(int pNumber);
 private:
 	bool areValuesSmallSequance(int* val);
 	bool areValuesLargeSequance(int* val);

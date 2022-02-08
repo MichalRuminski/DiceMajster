@@ -56,9 +56,6 @@ void Game::rollDices(int pNumber) {
 			}
 			availablePlayer1Reroll--;
 		}
-		if (availablePlayer1Reroll == 0 || availablePlayer2Reroll == 0) {
-			endTurn(pNumber);
-		}
 	}
 }
 
@@ -186,9 +183,22 @@ int Game::getCurrentTurn(int pNumber)
 		return this->currentTurnP1;
 }
 
-bool Game::gameOver()
+bool Game::isGameOver(int pNumber)
+{	
+	if (pNumber) {
+		return (this->currentTurnP2 == this->numberOfTurns && this->availablePlayer2Reroll > 0);
+	}
+	else
+		return (this->currentTurnP1 == this->numberOfTurns && this->availablePlayer1Reroll > 0);
+}
+
+int Game::getTotalScore(int pNumber)
 {
-	return(this->currentTurnP1 == this->numberOfTurns && this->currentTurnP2 == this->numberOfTurns);
+	if (pNumber) {
+		return this->totalPointsP2;
+	}
+	else
+		return this->totalPointsP1;
 }
 
 bool Game::areValuesSmallSequance(int* val) {

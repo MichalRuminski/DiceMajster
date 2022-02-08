@@ -52,6 +52,8 @@ namespace Kosci {
 	private: StartWindow^ parent;
 	private: void HandleNewGame();
 	private: void HandleClosing();
+	private: void HandleRoll(int pNumber);
+	private: void HandleEndTurn(int pNumber);
 
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	protected:
@@ -540,32 +542,6 @@ namespace Kosci {
 		
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	game->rollDices(0);
-	for each (System::Object^ p in this->gamefield_p1->Controls)
-	{
-		if (p->GetType() == PictureBox::typeid) {
-			if (!((PictureBox^)p)->Visible) {
-				((PictureBox^)p)->Visible = true;
-			}
-			
-			int value = this->game->getDiceValue(0, ((IndexTag^)((PictureBox^)p)->Tag)->getIndex());
-			if (value > 0) {
-				((PictureBox^)p)->Image = dicePictures[value - 1];
-			}
-			else {
-				((PictureBox^)p)->Image = dicePictures[1];
-			}
-				((PictureBox^)p)->BorderStyle = System::Windows::Forms::BorderStyle::None;
-		}
-	}
-	if(game->getAvailableRerols(0) == 0){
-		//update score
-		this->textBox1->Text += gcnew System::String(this->game->calculateScore(0).ToString());
-	}
-
-	//update rest of information here
-	this->label_curTurn->Text = gcnew System::String(this->game->getCurrentTurn(0).ToString());
-	this->label_availR->Text = gcnew System::String(this->game->getAvailableRerols(0).ToString());
 	
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
