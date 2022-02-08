@@ -116,10 +116,6 @@ namespace Kosci {
 			this->label_curTurn = (gcnew System::Windows::Forms::Label());
 			this->label_Rerol = (gcnew System::Windows::Forms::Label());
 			this->label_turnP1 = (gcnew System::Windows::Forms::Label());
-			this->label_availRP2 = (gcnew System::Windows::Forms::Label());
-			this->label_curTurnP2 = (gcnew System::Windows::Forms::Label());
-			this->label_RerolP2 = (gcnew System::Windows::Forms::Label());
-			this->label_turnP2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -130,6 +126,10 @@ namespace Kosci {
 			this->picturebox_D3P1 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D2P1 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D1P1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label_availRP2 = (gcnew System::Windows::Forms::Label());
+			this->label_curTurnP2 = (gcnew System::Windows::Forms::Label());
+			this->label_RerolP2 = (gcnew System::Windows::Forms::Label());
+			this->label_turnP2 = (gcnew System::Windows::Forms::Label());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
@@ -314,6 +314,7 @@ namespace Kosci {
 			this->picturebox_D5P1->TabIndex = 4;
 			this->picturebox_D5P1->TabStop = false;
 			this->picturebox_D5P1->Visible = false;
+			this->picturebox_D5P1->Tag = gcnew IndexTag(0);
 			this->picturebox_D5P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D4P1
@@ -325,6 +326,7 @@ namespace Kosci {
 			this->picturebox_D4P1->TabIndex = 3;
 			this->picturebox_D4P1->TabStop = false;
 			this->picturebox_D4P1->Visible = false;
+			this->picturebox_D4P1->Tag = gcnew IndexTag(1);
 			this->picturebox_D4P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D3P1
@@ -336,6 +338,7 @@ namespace Kosci {
 			this->picturebox_D3P1->TabIndex = 2;
 			this->picturebox_D3P1->TabStop = false;
 			this->picturebox_D3P1->Visible = false;
+			this->picturebox_D3P1->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D2P1
@@ -347,6 +350,7 @@ namespace Kosci {
 			this->picturebox_D2P1->TabIndex = 1;
 			this->picturebox_D2P1->TabStop = false;
 			this->picturebox_D2P1->Visible = false;
+			this->picturebox_D2P1->Tag = gcnew IndexTag(3);
 			this->picturebox_D2P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D1P1
@@ -358,22 +362,8 @@ namespace Kosci {
 			this->picturebox_D1P1->TabIndex = 0;
 			this->picturebox_D1P1->TabStop = false;
 			this->picturebox_D1P1->Visible = false;
+			this->picturebox_D1P1->Tag = gcnew IndexTag(4);
 			this->picturebox_D1P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
-			// 
-			// panel2
-			// 
-			this->panel2->Controls->Add(this->textBox2);
-			this->panel2->Controls->Add(this->button4);
-			this->panel2->Controls->Add(this->button3);
-			this->panel2->Controls->Add(this->label_availRP2);
-			this->panel2->Controls->Add(this->label_curTurnP2);
-			this->panel2->Controls->Add(this->label_RerolP2);
-			this->panel2->Controls->Add(this->label_turnP2);
-			this->panel2->Controls->Add(this->gamefield_p2);
-			this->panel2->Location = System::Drawing::Point(462, 28);
-			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(462, 661);
-			this->panel2->TabIndex = 2;
 			// 
 			// label_availRP2
 			// 
@@ -390,11 +380,12 @@ namespace Kosci {
 			this->label_curTurnP2->Name = L"label_curTurnP2";
 			this->label_curTurnP2->Size = System::Drawing::Size(0, 13);
 			this->label_curTurnP2->TabIndex = 6;
+			this->label_curTurnP2->Click += gcnew System::EventHandler(this, &GameWindow::label_curTurnP2_Click);
 			// 
 			// label_RerolP2
 			// 
 			this->label_RerolP2->AutoSize = true;
-			this->label_RerolP2->Location = System::Drawing::Point(134, 458);
+			this->label_RerolP2->Location = System::Drawing::Point(34, 458);
 			this->label_RerolP2->Name = L"label_RerolP2";
 			this->label_RerolP2->Size = System::Drawing::Size(89, 13);
 			this->label_RerolP2->TabIndex = 5;
@@ -404,10 +395,25 @@ namespace Kosci {
 			// 
 			this->label_turnP2->AutoSize = true;
 			this->label_turnP2->Location = System::Drawing::Point(91, 439);
-			this->label_turnP2->Name = L"label_turnP1";
+			this->label_turnP2->Name = L"label_turnP2";
 			this->label_turnP2->Size = System::Drawing::Size(32, 13);
 			this->label_turnP2->TabIndex = 4;
 			this->label_turnP2->Text = L"Tura:";
+			// 
+			// panel2
+			// 
+			this->panel2->Controls->Add(this->textBox2);
+			this->panel2->Controls->Add(this->button4);
+			this->panel2->Controls->Add(this->button3);
+			this->panel2->Controls->Add(this->label_availRP2);
+			this->panel2->Controls->Add(this->label_curTurnP2);
+			this->panel2->Controls->Add(this->label_RerolP2);
+			this->panel2->Controls->Add(this->label_turnP2);
+			this->panel2->Controls->Add(this->gamefield_p2);
+			this->panel2->Location = System::Drawing::Point(462, 28);
+			this->panel2->Name = L"panel2";
+			this->panel2->Size = System::Drawing::Size(462, 661);
+			this->panel2->TabIndex = 2;
 			// 
 			// textBox2
 			// 
@@ -459,6 +465,7 @@ namespace Kosci {
 			this->picturebox_D5P2->TabIndex = 4;
 			this->picturebox_D5P2->TabStop = false;
 			this->picturebox_D5P2->Visible = false;
+			this->picturebox_D5P2->Tag = gcnew IndexTag(0);
 			this->picturebox_D5P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D4P2
@@ -470,6 +477,7 @@ namespace Kosci {
 			this->picturebox_D4P2->TabIndex = 3;
 			this->picturebox_D4P2->TabStop = false;
 			this->picturebox_D4P2->Visible = false;
+			this->picturebox_D4P2->Tag = gcnew IndexTag(1);
 			this->picturebox_D4P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D3P2
@@ -481,6 +489,7 @@ namespace Kosci {
 			this->picturebox_D3P2->TabIndex = 2;
 			this->picturebox_D3P2->TabStop = false;
 			this->picturebox_D3P2->Visible = false;
+			this->picturebox_D3P2->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D2P2
@@ -492,6 +501,7 @@ namespace Kosci {
 			this->picturebox_D2P2->TabIndex = 1;
 			this->picturebox_D2P2->TabStop = false;
 			this->picturebox_D2P2->Visible = false;
+			this->picturebox_D2P2->Tag = gcnew IndexTag(3);
 			this->picturebox_D2P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
 			// picturebox_D1P2
@@ -503,9 +513,10 @@ namespace Kosci {
 			this->picturebox_D1P2->TabIndex = 0;
 			this->picturebox_D1P2->TabStop = false;
 			this->picturebox_D1P2->Visible = false;
+			this->picturebox_D1P2->Tag = gcnew IndexTag(4);
 			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			// 
-			// Main
+			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -514,7 +525,7 @@ namespace Kosci {
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
-			this->Name = L"Main";
+			this->Name = L"GameWindow";
 			this->Text = L"Kosci";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &GameWindow::Main_FormClosing);
 			this->menuStrip1->ResumeLayout(false);
@@ -589,19 +600,21 @@ namespace Kosci {
 
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		this->HandleRoll(0);
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		game->endTurn(0);
-		this->textBox1->Text += gcnew System::String(this->game->calculateScore(0).ToString());
+		this->HandleEndTurn(0);
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		this->HandleRoll(1);
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->HandleEndTurn(1);
 	}
 	private: System::Void Main_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 		this->HandleClosing();
 	}
-	};
+	private: System::Void label_curTurnP2_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }
