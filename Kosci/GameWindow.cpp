@@ -54,8 +54,8 @@ namespace Kosci {
 															System::Windows::Forms::MessageBoxButtons::OK);
 				}
 				if (pNumber) {
-					this->label_curTurn->Text = gcnew System::String(this->game->getCurrentTurn(pNumber).ToString());
-					this->label_availR->Text = gcnew System::String(this->game->getAvailableRerols(pNumber).ToString());
+					this->label_curTurnP2->Text = gcnew System::String(this->game->getCurrentTurn(pNumber).ToString());
+					this->label_availRP2->Text = gcnew System::String(this->game->getAvailableRerols(pNumber).ToString());
 				}
 				else {
 					this->label_curTurn->Text = gcnew System::String(this->game->getCurrentTurn(pNumber).ToString());

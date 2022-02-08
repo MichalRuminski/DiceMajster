@@ -6,7 +6,7 @@
 
 
 namespace Kosci {
-	ref class StartWindow ;
+	ref class StartWindow;
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -89,6 +89,11 @@ namespace Kosci {
 	private: System::Windows::Forms::Label^ label_Rerol;
 	private: System::Windows::Forms::Label^ label_turnP1;
 	private: System::Windows::Forms::Label^ label_p1Name;
+	private: System::Windows::Forms::Label^ label_availRP2;
+	private: System::Windows::Forms::Label^ label_curTurnP2;
+	private: System::Windows::Forms::Label^ label_RerolP2;
+	private: System::Windows::Forms::Label^ label_turnP2;
+	private: System::Windows::Forms::Label^ label_p2Name;
 
 
 	private:
@@ -111,6 +116,10 @@ namespace Kosci {
 			this->label_curTurn = (gcnew System::Windows::Forms::Label());
 			this->label_Rerol = (gcnew System::Windows::Forms::Label());
 			this->label_turnP1 = (gcnew System::Windows::Forms::Label());
+			this->label_availRP2 = (gcnew System::Windows::Forms::Label());
+			this->label_curTurnP2 = (gcnew System::Windows::Forms::Label());
+			this->label_RerolP2 = (gcnew System::Windows::Forms::Label());
+			this->label_turnP2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -356,11 +365,49 @@ namespace Kosci {
 			this->panel2->Controls->Add(this->textBox2);
 			this->panel2->Controls->Add(this->button4);
 			this->panel2->Controls->Add(this->button3);
+			this->panel2->Controls->Add(this->label_availRP2);
+			this->panel2->Controls->Add(this->label_curTurnP2);
+			this->panel2->Controls->Add(this->label_RerolP2);
+			this->panel2->Controls->Add(this->label_turnP2);
 			this->panel2->Controls->Add(this->gamefield_p2);
 			this->panel2->Location = System::Drawing::Point(462, 28);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(462, 661);
 			this->panel2->TabIndex = 2;
+			// 
+			// label_availRP2
+			// 
+			this->label_availRP2->AutoSize = true;
+			this->label_availRP2->Location = System::Drawing::Point(129, 458);
+			this->label_availRP2->Name = L"label_availRP2";
+			this->label_availRP2->Size = System::Drawing::Size(0, 13);
+			this->label_availRP2->TabIndex = 7;
+			// 
+			// label_curTurnP2
+			// 
+			this->label_curTurnP2->AutoSize = true;
+			this->label_curTurnP2->Location = System::Drawing::Point(129, 439);
+			this->label_curTurnP2->Name = L"label_curTurnP2";
+			this->label_curTurnP2->Size = System::Drawing::Size(0, 13);
+			this->label_curTurnP2->TabIndex = 6;
+			// 
+			// label_RerolP2
+			// 
+			this->label_RerolP2->AutoSize = true;
+			this->label_RerolP2->Location = System::Drawing::Point(134, 458);
+			this->label_RerolP2->Name = L"label_RerolP2";
+			this->label_RerolP2->Size = System::Drawing::Size(89, 13);
+			this->label_RerolP2->TabIndex = 5;
+			this->label_RerolP2->Text = L"Dostêpne Rerolle";
+			// 
+			// label_turnP2
+			// 
+			this->label_turnP2->AutoSize = true;
+			this->label_turnP2->Location = System::Drawing::Point(91, 439);
+			this->label_turnP2->Name = L"label_turnP1";
+			this->label_turnP2->Size = System::Drawing::Size(32, 13);
+			this->label_turnP2->TabIndex = 4;
+			this->label_turnP2->Text = L"Tura:";
 			// 
 			// textBox2
 			// 
@@ -505,7 +552,7 @@ namespace Kosci {
 		}
 	}
 	private: System::Void nowaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+
 		this->HandleNewGame();
 	}
 
@@ -530,31 +577,31 @@ namespace Kosci {
 		if (((PictureBox^)sender)->Parent->Name == "gamefield_p2") {
 			pNumber = 1;
 		}
-			game->selectDice(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
+		game->selectDice(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
 
-		if (game->isDiceSelected(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex())){
+		if (game->isDiceSelected(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex())) {
 			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 		}
 		else {
 			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::None;
 		}
-		
-		
+
+
 	}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-}
-private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	game->endTurn(0);
-	this->textBox1->Text += gcnew System::String(this->game->calculateScore(0).ToString());
-}
-private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-}
-private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void Main_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
-	this->HandleClosing();
-}
-};
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		game->endTurn(0);
+		this->textBox1->Text += gcnew System::String(this->game->calculateScore(0).ToString());
+	}
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	}
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void Main_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		this->HandleClosing();
+	}
+	};
 }
