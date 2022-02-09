@@ -121,10 +121,19 @@ namespace Kosci {
 			}
 		}
 		if (this->game->isGameOver(0) && this->game->isGameOver(1)) {
-			String^ winner = this->game->getTotalScore(0) > this->game->getTotalScore(1) ? this->label_p1Name->Text : this->label_p2Name->Text;
-			result = System::Windows::Forms::MessageBox::Show(gcnew System::String("Gra skoñcozna, wygra³ ktos tam z punktami"),
-				gcnew System::String("Dostêpne rerolle"),
-				System::Windows::Forms::MessageBoxButtons::YesNo);
+			int winner = this->game->getTotalScore(0) > this->game->getTotalScore(1) ? 0 : 1;
+			this->game->getPlayerName(winner);
+			//int score =  
+			result = System::Windows::Forms::MessageBox::Show(System::String::Format("Gra skoñcozna, wygra³ {0} zdobywaj¹c {1} punktów.",
+																gcnew System::String(this->game->getPlayerName(winner).c_str()),
+																this->game->getTotalScore(winner)),
+															gcnew System::String("Koniec gry"),
+														System::Windows::Forms::MessageBoxButtons::YesNo);
+			if (result == System::Windows::Forms::DialogResult::Yes) {
+				
+				this->Close();
+				parent->Show();
+			}
 		}
 	}
 }

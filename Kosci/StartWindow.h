@@ -33,6 +33,7 @@ namespace Kosci {
 
 	private: Kosci::GameWindow^ gameWindow;
 	private: System::Windows::Forms::Label^ label_p1Name;
+
 	protected:
 	private: System::Windows::Forms::Label^ label_p2Name;
 	private: System::Windows::Forms::Label^ label_turnNum;
@@ -155,7 +156,6 @@ namespace Kosci {
 			this->Name = L"StartWindow";
 			this->Text = L"Koœci";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &StartWindow::StartWindow_FormClosing);
-			this->Load += gcnew System::EventHandler(this, &StartWindow::StartWindow_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -164,7 +164,6 @@ namespace Kosci {
 	private: System::Void button_StartGame_Click(System::Object^ sender, System::EventArgs^ e) {
 		//create game
 		//create GameWindow (main.h)
-		//show GameWindow and hide this window(dont know if this will work)
 		System::String^ maxTurns = (System::String^)(this->comboBox_turnNum)->SelectedItem;
 		System::String^ maxReroll = (System::String^)(this->comboBox_rrollsNum)->SelectedItem;
 
@@ -181,7 +180,6 @@ namespace Kosci {
 	}
 private: System::Void StartWindow_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 }
-private: System::Void StartWindow_Load(System::Object^ sender, System::EventArgs^ e) {
-}
+
 };
 }

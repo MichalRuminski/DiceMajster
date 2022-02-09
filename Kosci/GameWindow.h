@@ -46,6 +46,9 @@ namespace Kosci {
 			if (dicePictures) {
 				delete dicePictures;
 			}
+			if (game) {
+				delete game;
+			}
 		}
 
 	private: AboutWindow^ aboutWindow;
