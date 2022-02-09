@@ -101,9 +101,12 @@ int Game::getDiceValue(int pNumber, int index)
 }
 
 int  Game::calculateScore(int pNumber) {
-
-	bool contains_double = false;
-	bool contains_threes = false;
+	bool containsDoublePair = false;
+	bool containsPair = false;
+	bool containsThrees = false;
+	bool containsFour = false;
+	bool containsFive = false;
+	int consecSearch = 0;
 	int numInSeq = 0;
 	//sort array, and check if current val is same as next, if not, check if difference is smaller than 1;
 	std::vector<int> values;
@@ -117,28 +120,56 @@ int  Game::calculateScore(int pNumber) {
 
 	int prevVal = values[0];
 	for (int i = 1; i < 5; i++) {
-		if (prevVal == values[i] && contains_double) {
-			contains_threes = true;
-			contains_double = false;
+		if (prevVal == values[i]) {
+			if (containsFour) {
+				containsFive = true;
+				containsFour = false;
+			}
+			else if (consecSearch > 0 && containsThrees) {
+				containsFour = true;
+				containsThrees = false;
+			}
+			else if (consecSearch == 0 && containsPair) {
+				containsDoublePair = true;
+
+			}
+			else if (consecSearch > 0 && containsPair) {
+				containsThrees = true;
+				containsPair = false;
+
+			}
+			else if (!containsPair) {
+				containsPair = true;
+			}
+			consecSearch++;
 		}
-		else if (prevVal == values[i] && !contains_double) {
-			contains_double = true;
-		}
-		else if (/*prevVal != values[i] && */(values[i] - prevVal) == 1) {
+		else if ((values[i] - prevVal) == 1) {
 			numInSeq++;
+			consecSearch = 0;
 		}
+		else
+			consecSearch = 0;
 		prevVal = values[i];
 	}
 
 	if (numInSeq < 3) {
-		if (contains_double && contains_threes) {
+		if (containsFive) {
 			return 30;
 		}
-		else if (contains_double) {
-			return 10;
-		}
-		else if (contains_threes) {
+		else if (containsFour) {
 			return 20;
+		}
+		else if (containsPair && containsThrees) {
+			return 15;
+		}
+		else if (containsDoublePair) {
+			return 20;
+		}
+		else if (containsPair) {
+			return 5;
+		}
+		else if (containsThrees) {
+			return 10;
 		}
 	}
 	else if (numInSeq == 3) {
