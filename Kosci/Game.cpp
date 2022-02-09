@@ -9,6 +9,8 @@
 
 Game::Game(std::string p1Name, std::string p2Name, int nTurns, int mRerolls) {
 	srand(time(NULL));
+	this->p1Name = p1Name;
+	this->p2Name = p2Name;
 	numberOfTurns = nTurns;
 	maxRerolls = mRerolls;
 	availablePlayer1Reroll = availablePlayer2Reroll = maxRerolls;
@@ -221,6 +223,16 @@ bool Game::isGameOver(int pNumber)
 	}
 	else
 		return (this->currentTurnP1 == this->numberOfTurns && this->availablePlayer1Reroll > 0);
+}
+
+std::string Game::getPlayerName(int pNumber)
+{
+	if (pNumber) {
+		return this->p2Name;
+	}
+	else {
+		return this->p1Name;
+	}
 }
 
 int Game::getTotalScore(int pNumber)
