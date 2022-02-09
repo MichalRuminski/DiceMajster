@@ -13,6 +13,8 @@ namespace Kosci {
 		this->InitializeComponent();
 		this->prevWidth = this->Size.Width;
 		this->prevHeight = this->Size.Height;
+		this->label_p1Name->Text = gcnew System::String(this->game->getPlayerName(0).c_str());
+		this->label_p2Name->Text = gcnew System::String(this->game->getPlayerName(1).c_str());
 	}
 
 	void GameWindow::HandleNewGame() {
@@ -118,6 +120,11 @@ namespace Kosci {
 				this->button2->Enabled = false;
 			}
 		}
-		
+		if (this->game->isGameOver(0) && this->game->isGameOver(1)) {
+			String^ winner = this->game->getTotalScore(0) > this->game->getTotalScore(1) ? this->label_p1Name->Text : this->label_p2Name->Text;
+			result = System::Windows::Forms::MessageBox::Show(gcnew System::String("Gra skoñcozna, wygra³ ktos tam z punktami"),
+				gcnew System::String("Dostêpne rerolle"),
+				System::Windows::Forms::MessageBoxButtons::YesNo);
+		}
 	}
 }

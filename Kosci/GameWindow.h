@@ -127,6 +127,7 @@ namespace Kosci {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->gamefield_p1 = (gcnew System::Windows::Forms::GroupBox());
 			this->label_p1Name = (gcnew System::Windows::Forms::Label());
+			this->label_p2Name = (gcnew System::Windows::Forms::Label());
 			this->picturebox_D5P1 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D4P1 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D3P1 = (gcnew System::Windows::Forms::PictureBox());
@@ -453,6 +454,7 @@ namespace Kosci {
 			// 
 			// gamefield_p2
 			// 
+			this->gamefield_p2->Controls->Add(this->label_p2Name);
 			this->gamefield_p2->Controls->Add(this->picturebox_D5P2);
 			this->gamefield_p2->Controls->Add(this->picturebox_D4P2);
 			this->gamefield_p2->Controls->Add(this->picturebox_D3P2);
@@ -463,6 +465,14 @@ namespace Kosci {
 			this->gamefield_p2->Size = System::Drawing::Size(462, 382);
 			this->gamefield_p2->TabIndex = 0;
 			this->gamefield_p2->TabStop = false;
+			// 
+			// label_p2Name
+			// 
+			this->label_p2Name->AutoSize = true;
+			this->label_p2Name->Location = System::Drawing::Point(176, 20);
+			this->label_p2Name->Name = L"label_p2Name";
+			this->label_p2Name->Size = System::Drawing::Size(0, 13);
+			this->label_p2Name->TabIndex = 5;
 			// 
 			// picturebox_D5P2
 			// 
