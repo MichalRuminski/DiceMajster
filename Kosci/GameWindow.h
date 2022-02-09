@@ -277,6 +277,7 @@ namespace Kosci {
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"Nastepna tura";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Enabled = false;
 			this->button2->Click += gcnew System::EventHandler(this, &GameWindow::button2_Click);
 			// 
 			// button1
@@ -437,6 +438,7 @@ namespace Kosci {
 			this->button4->TabIndex = 2;
 			this->button4->Text = L"Nastepna tura";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Enabled = false;
 			this->button4->Click += gcnew System::EventHandler(this, &GameWindow::button4_Click);
 			// 
 			// button3
@@ -603,9 +605,8 @@ namespace Kosci {
 		else {
 			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::None;
 		}
-
-
 	}
+	
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->HandleRoll(0);
 	}

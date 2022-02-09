@@ -58,10 +58,16 @@ namespace Kosci {
 			if (pNumber) {
 				this->label_curTurnP2->Text = gcnew System::String(this->game->getCurrentTurn(pNumber).ToString());
 				this->label_availRP2->Text = gcnew System::String(this->game->getAvailableRerols(pNumber).ToString());
+				if (!this->button4->Enabled) {
+					this->button4->Enabled = true;
+				}
 			}
 			else {
 				this->label_curTurn->Text = gcnew System::String(this->game->getCurrentTurn(pNumber).ToString());
 				this->label_availR->Text = gcnew System::String(this->game->getAvailableRerols(pNumber).ToString());
+				if (!this->button2->Enabled) {
+					this->button2->Enabled = true;
+				}
 			}
 
 		}
@@ -95,16 +101,22 @@ namespace Kosci {
 			if (pNumber) {	
 				this->label_curTurnP2->Text = t;
 				this->label_availRP2->Text = rr;
-				this->textBox2->Text += System::String::Format("Tura {0}:Zdoby³eœ {1}. Wszystkie punkty {2}", t, score,tScore);
+				this->textBox2->Text += System::String::Format("Tura {0}:Zdoby³eœ {1}. Wszystkie punkty {2}\n", t, score,tScore);
+				this->button4->Enabled = false;
 			}
 			else {
 				this->label_curTurn->Text = t;
 				this->label_availR->Text = rr;
-				this->textBox1->Text += System::String::Format("Tura {0}:Zdoby³eœ {1}. Wszystkie punkty {2}", t, score, tScore);
+				this->textBox1->Text += System::String::Format("Tura {0}:Zdoby³eœ {1}. Wszystkie punkty {2}\n", t, score, tScore);
+				this->button2->Enabled = false;
 			}
 		}
-
-
-
+		System::Windows::Forms::GroupBox^ gameField = pNumber > 0 ? this->gamefield_p2 : this->gamefield_p1;
+		for each (System::Object^ p in gameField->Controls)
+		{
+			if (p->GetType() == PictureBox::typeid) {
+				((System::Windows::Forms::PictureBox^)p)->Visible = false;
+			}
+		}
 	}
 }
