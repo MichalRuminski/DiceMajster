@@ -39,7 +39,7 @@ namespace Kosci {
 						if (!((PictureBox^)p)->Visible) {
 							((PictureBox^)p)->Visible = true;
 						}
-						int value = this->game->getDiceValue(0, ((IndexTag^)((PictureBox^)p)->Tag)->getIndex());
+						int value = this->game->getDiceValue(pNumber, ((IndexTag^)((PictureBox^)p)->Tag)->getIndex());
 						if (value > 0) {
 							((PictureBox^)p)->Image = dicePictures[value - 1];
 						}
