@@ -98,6 +98,13 @@ namespace Kosci {
 			System::String^ score = this->game->calculateScore(pNumber).ToString();
 			System::String^ tScore = this->game->getTotalScore(pNumber).ToString();
 
+			System::Windows::Forms::GroupBox^ gameField = pNumber > 0 ? this->gamefield_p2 : this->gamefield_p1;
+			for each (System::Object ^ p in gameField->Controls)
+			{
+				if (p->GetType() == PictureBox::typeid) {
+					((System::Windows::Forms::PictureBox^)p)->Visible = false;
+				}
+			}
 			if (pNumber) {	
 				this->label_curTurnP2->Text = t;
 				this->label_availRP2->Text = rr;
@@ -111,12 +118,6 @@ namespace Kosci {
 				this->button2->Enabled = false;
 			}
 		}
-		System::Windows::Forms::GroupBox^ gameField = pNumber > 0 ? this->gamefield_p2 : this->gamefield_p1;
-		for each (System::Object^ p in gameField->Controls)
-		{
-			if (p->GetType() == PictureBox::typeid) {
-				((System::Windows::Forms::PictureBox^)p)->Visible = false;
-			}
-		}
+		
 	}
 }
