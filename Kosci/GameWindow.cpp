@@ -9,6 +9,7 @@ namespace Kosci {
 		this->parent = parent;
 		this->game = g;
 		this->dicePictures = gcnew array<System::Drawing::Bitmap^>(6);
+		this->selectedDicePictures = gcnew array<System::Drawing::Bitmap^>(6);
 		this->InitializeTextures();
 		this->InitializeComponent();
 		this->prevWidth = this->Size.Width;
@@ -48,7 +49,6 @@ namespace Kosci {
 						else {
 							((PictureBox^)p)->Image = dicePictures[1];
 						}
-						((PictureBox^)p)->BorderStyle = System::Windows::Forms::BorderStyle::None;
 					}
 				}
 			}

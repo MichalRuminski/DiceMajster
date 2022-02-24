@@ -6,7 +6,7 @@
 
 
 namespace Kosci {
-	//ref class StartWindow;
+
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -16,10 +16,11 @@ namespace Kosci {
 	using namespace System::Drawing;
 
 	using namespace msclr::interop;
-
+	ref class StartWindow;
 
 	public ref class GameWindow : public System::Windows::Forms::Form
 	{
+
 	public: GameWindow(Game* g, StartWindow^ parent);
 	public:
 		GameWindow(void)
@@ -41,7 +42,7 @@ namespace Kosci {
 			{
 				delete components;
 			}
-			//check if member field is added to components container
+
 			if (dicePictures) {
 				delete dicePictures;
 			}
@@ -52,6 +53,9 @@ namespace Kosci {
 
 	private: AboutWindow^ aboutWindow;
 	private: array<System::Drawing::Bitmap^>^ dicePictures;
+	private: array<System::Drawing::Bitmap^>^ selectedDicePictures;
+	private: Bitmap^ rzutBmp;
+	private: Bitmap^ turaBmp;
 
 	private: Game* game;
 	private: StartWindow^ parent;
@@ -75,7 +79,7 @@ namespace Kosci {
 	private: System::Windows::Forms::GroupBox^ gamefield_p1;
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::GroupBox^ gamefield_p2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::RichTextBox^ textBox1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::PictureBox^ picturebox_D5P1;
@@ -84,7 +88,7 @@ namespace Kosci {
 	private: System::Windows::Forms::PictureBox^ picturebox_D2P1;
 	private: System::Windows::Forms::PictureBox^ picturebox_D1P1;
 
-	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::RichTextBox^ textBox2;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::PictureBox^ picturebox_D5P2;
@@ -124,7 +128,7 @@ namespace Kosci {
 			this->label_curTurn = (gcnew System::Windows::Forms::Label());
 			this->label_Rerol = (gcnew System::Windows::Forms::Label());
 			this->label_turnP1 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->gamefield_p1 = (gcnew System::Windows::Forms::GroupBox());
@@ -140,7 +144,7 @@ namespace Kosci {
 			this->label_RerolP2 = (gcnew System::Windows::Forms::Label());
 			this->label_turnP2 = (gcnew System::Windows::Forms::Label());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::RichTextBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->gamefield_p2 = (gcnew System::Windows::Forms::GroupBox());
@@ -217,8 +221,6 @@ namespace Kosci {
 			// 
 			// panel1
 			// 
-			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(255)),
-				static_cast<System::Int32>(static_cast<System::Byte>(192)));
 			this->panel1->Controls->Add(this->label_availR);
 			this->panel1->Controls->Add(this->label_curTurn);
 			this->panel1->Controls->Add(this->label_Rerol);
@@ -279,21 +281,28 @@ namespace Kosci {
 			this->button2->Enabled = false;
 			this->button2->Location = System::Drawing::Point(319, 394);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(75, 35);
 			this->button2->TabIndex = 2;
-			this->button2->Text = L"Nastepna tura";
+			this->button2->Text = L"";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->BackgroundImage = gcnew System::Drawing::Bitmap(this->turaBmp, 75, 35);
+			this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button2->Click += gcnew System::EventHandler(this, &GameWindow::button2_Click);
+			this->button2->Resize += gcnew System::EventHandler(this, &GameWindow::buttonTura_Resize);
 			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(37, 394);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(75, 35);
 			this->button1->TabIndex = 1;
-			this->button1->Text = L"Rzucaj";
+			this->button1->Text = L"";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->BackgroundImage = gcnew System::Drawing::Bitmap(this->rzutBmp, 75, 35);
+			this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button1->Click += gcnew System::EventHandler(this, &GameWindow::button1_Click);
+			this->button1->Resize += gcnew System::EventHandler(this, &GameWindow::buttonRzut_Resize);
+
 			// 
 			// gamefield_p1
 			// 
@@ -307,6 +316,7 @@ namespace Kosci {
 			this->gamefield_p1->Location = System::Drawing::Point(0, 0);
 			this->gamefield_p1->Name = L"gamefield_p1";
 			this->gamefield_p1->Size = System::Drawing::Size(462, 388);
+			this->gamefield_p1->BackgroundImage = gcnew System::Drawing::Bitmap("Resources\\Bitmaps\\tlo.jpg");
 			this->gamefield_p1->TabIndex = 0;
 			this->gamefield_p1->TabStop = false;
 			// 
@@ -327,7 +337,9 @@ namespace Kosci {
 			this->picturebox_D5P1->TabIndex = 4;
 			this->picturebox_D5P1->TabStop = false;
 			this->picturebox_D5P1->Visible = false;
+			this->picturebox_D5P1->Tag = gcnew IndexTag(0);
 			this->picturebox_D5P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D5P1->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D4P1
 			// 
@@ -338,7 +350,9 @@ namespace Kosci {
 			this->picturebox_D4P1->TabIndex = 3;
 			this->picturebox_D4P1->TabStop = false;
 			this->picturebox_D4P1->Visible = false;
+			this->picturebox_D4P1->Tag = gcnew IndexTag(1);
 			this->picturebox_D4P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D4P1->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D3P1
 			// 
@@ -349,7 +363,9 @@ namespace Kosci {
 			this->picturebox_D3P1->TabIndex = 2;
 			this->picturebox_D3P1->TabStop = false;
 			this->picturebox_D3P1->Visible = false;
+			this->picturebox_D3P1->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D3P1->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D2P1
 			// 
@@ -360,7 +376,9 @@ namespace Kosci {
 			this->picturebox_D2P1->TabIndex = 1;
 			this->picturebox_D2P1->TabStop = false;
 			this->picturebox_D2P1->Visible = false;
+			this->picturebox_D2P1->Tag = gcnew IndexTag(3);
 			this->picturebox_D2P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D2P1->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D1P1
 			// 
@@ -371,7 +389,9 @@ namespace Kosci {
 			this->picturebox_D1P1->TabIndex = 0;
 			this->picturebox_D1P1->TabStop = false;
 			this->picturebox_D1P1->Visible = false;
+			this->picturebox_D1P1->Tag = gcnew IndexTag(4);
 			this->picturebox_D1P1->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D1P1->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// label_p2Name
 			// 
@@ -418,8 +438,6 @@ namespace Kosci {
 			// 
 			// panel2
 			// 
-			this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(255)),
-				static_cast<System::Int32>(static_cast<System::Byte>(192)));
 			this->panel2->Controls->Add(this->textBox2);
 			this->panel2->Controls->Add(this->button4);
 			this->panel2->Controls->Add(this->button3);
@@ -446,21 +464,27 @@ namespace Kosci {
 			this->button4->Enabled = false;
 			this->button4->Location = System::Drawing::Point(315, 394);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->Size = System::Drawing::Size(75, 35);
 			this->button4->TabIndex = 2;
-			this->button4->Text = L"Nastepna tura";
+			this->button4->Text = L"";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->BackgroundImage = gcnew System::Drawing::Bitmap(this->turaBmp, 75, 35);
+			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button4->Click += gcnew System::EventHandler(this, &GameWindow::button4_Click);
+			this->button4->Resize += gcnew System::EventHandler(this, &GameWindow::buttonTura_Resize);
 			// 
 			// button3
 			// 
 			this->button3->Location = System::Drawing::Point(33, 394);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->Size = System::Drawing::Size(75, 35);
 			this->button3->TabIndex = 1;
-			this->button3->Text = L"Rzucaj";
+			this->button3->Text = L"";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->BackgroundImage = gcnew System::Drawing::Bitmap(this->rzutBmp, 75, 35);
+			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button3->Click += gcnew System::EventHandler(this, &GameWindow::button3_Click);
+			this->button3->Resize += gcnew System::EventHandler(this, &GameWindow::buttonRzut_Resize);
 			// 
 			// gamefield_p2
 			// 
@@ -474,6 +498,7 @@ namespace Kosci {
 			this->gamefield_p2->Location = System::Drawing::Point(0, 0);
 			this->gamefield_p2->Name = L"gamefield_p2";
 			this->gamefield_p2->Size = System::Drawing::Size(462, 387);
+			this->gamefield_p2->BackgroundImage = gcnew System::Drawing::Bitmap("Resources\\Bitmaps\\tlo.jpg");
 			this->gamefield_p2->TabIndex = 0;
 			this->gamefield_p2->TabStop = false;
 			// 
@@ -486,7 +511,9 @@ namespace Kosci {
 			this->picturebox_D5P2->TabIndex = 4;
 			this->picturebox_D5P2->TabStop = false;
 			this->picturebox_D5P2->Visible = false;
+			this->picturebox_D5P2->Tag = gcnew IndexTag(0);
 			this->picturebox_D5P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D5P2->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D4P2
 			// 
@@ -497,7 +524,9 @@ namespace Kosci {
 			this->picturebox_D4P2->TabIndex = 3;
 			this->picturebox_D4P2->TabStop = false;
 			this->picturebox_D4P2->Visible = false;
+			this->picturebox_D4P2->Tag = gcnew IndexTag(1);
 			this->picturebox_D4P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D4P2->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D3P2
 			// 
@@ -508,7 +537,9 @@ namespace Kosci {
 			this->picturebox_D3P2->TabIndex = 2;
 			this->picturebox_D3P2->TabStop = false;
 			this->picturebox_D3P2->Visible = false;
+			this->picturebox_D3P2->Tag = gcnew IndexTag(2);
 			this->picturebox_D3P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D3P2->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D2P2
 			// 
@@ -519,7 +550,9 @@ namespace Kosci {
 			this->picturebox_D2P2->TabIndex = 1;
 			this->picturebox_D2P2->TabStop = false;
 			this->picturebox_D2P2->Visible = false;
+			this->picturebox_D2P2->Tag = gcnew IndexTag(3);
 			this->picturebox_D2P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D2P2->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
 			// 
 			// picturebox_D1P2
 			// 
@@ -530,7 +563,10 @@ namespace Kosci {
 			this->picturebox_D1P2->TabIndex = 0;
 			this->picturebox_D1P2->TabStop = false;
 			this->picturebox_D1P2->Visible = false;
+			this->picturebox_D1P2->Tag = gcnew IndexTag(4);
 			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
+			this->picturebox_D1P2->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
+
 			// 
 			// GameWindow
 			// 
@@ -576,7 +612,6 @@ namespace Kosci {
 
 		aboutWindow->ShowDialog();
 		if (aboutWindow->DialogResult == System::Windows::Forms::DialogResult::OK) {
-			//aboutWindow->Close();
 			delete aboutWindow;
 		}
 	}
@@ -586,9 +621,9 @@ namespace Kosci {
 	}
 
 	private: System::Void InitializeTextures() {
-		if (dicePictures != nullptr) {
+		if (this->dicePictures != nullptr) {
 			int index = 0;
-			for each (System::String ^ f in System::IO::Directory::GetFiles("Resources\\Bitmaps\\"))
+			for each (System::String ^ f in System::IO::Directory::GetFiles("Resources\\Bitmaps\\unsel"))
 			{
 				this->dicePictures[index] = gcnew System::Drawing::Bitmap(f);
 				index++;
@@ -597,6 +632,19 @@ namespace Kosci {
 		else {
 			throw gcnew System::NullReferenceException();
 		}
+		if (this->selectedDicePictures != nullptr) {
+			int index = 0;
+			for each (System::String ^ f in System::IO::Directory::GetFiles("Resources\\Bitmaps\\sel"))
+			{
+				this->selectedDicePictures[index] = gcnew System::Drawing::Bitmap(f);
+				index++;
+			}
+		}
+		else {
+			throw gcnew System::NullReferenceException();
+		}
+		this->rzutBmp = gcnew System::Drawing::Bitmap("Resources\\Bitmaps\\rzucaj.jpg");
+		this->turaBmp = gcnew System::Drawing::Bitmap("Resources\\Bitmaps\\nastepna_tura.jpg");
 	}
 	private: System::Void picturebox_Click(System::Object^ sender, System::EventArgs^ e) {
 		int pNumber = 0;
@@ -609,13 +657,17 @@ namespace Kosci {
 		game->selectDice(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
 
 		if (game->isDiceSelected(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex())) {
-			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			((PictureBox^)sender)->Image = this->selectedDicePictures[this->game->getDiceValue(pNumber,
+				((IndexTag^)((PictureBox^)sender)->Tag)->getIndex()) - 1];
+			((IndexTag^)((PictureBox^)sender)->Tag)->setIsSelected(true);
 		}
 		else {
-			((PictureBox^)sender)->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			((PictureBox^)sender)->Image = this->dicePictures[this->game->getDiceValue(pNumber,
+				((IndexTag^)((PictureBox^)sender)->Tag)->getIndex()) - 1];
+			((IndexTag^)((PictureBox^)sender)->Tag)->setIsSelected(false);
 		}
 	}
-	
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->HandleRoll(0);
 	}
@@ -643,11 +695,43 @@ namespace Kosci {
 		for each (System::Windows::Forms::Control ^ c in this->Controls) {
 
 			c->Scale(scaleWidth, scaleHeight);
-			c->Location.X = c->Location.X * scaleWidth;
-			c->Location.Y = c->Location.Y * scaleHeight;
+			if (c->GetType() == Panel::typeid) {
+				if(((Panel^)c)->Name == "panel2") {
+					((Panel^)c)->Location.X = this->panel1->Location.X + this->panel1->Size.Width;
+					((Panel^)c)->Location.Y = this->panel1->Location.Y;
+			}
+			}
+			else {
+				c->Location.X = c->Location.X * scaleWidth;
+				c->Location.Y = c->Location.Y * scaleHeight;
+			}
 		}
 		this->prevWidth = this->Size.Width;
 		this->prevHeight = this->Size.Height;
+	}
+	private: System::Void picturebox_Resize(System::Object^ sender, System::EventArgs^ e) {
+		if (((PictureBox^)sender)->Visible){
+			int pNumber = ((PictureBox^)sender)->Parent->Name == "gamefield_p1" ? 0 : 1;
+			int value = this->game->getDiceValue(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
+			if (((IndexTag^)((PictureBox^)sender)->Tag)->getIsSelected()) {
+				((PictureBox^)sender)->Image = gcnew System::Drawing::Bitmap(
+					this->selectedDicePictures[value - 1],
+							((PictureBox^)sender)->Size.Width, ((PictureBox^)sender)->Size.Height);
+			}
+			else {
+				((PictureBox^)sender)->Image = gcnew System::Drawing::Bitmap(
+					this->dicePictures[value - 1],
+					((PictureBox^)sender)->Size.Width, ((PictureBox^)sender)->Size.Height);
+			}
+		}
+	}
+	private: System::Void buttonTura_Resize(System::Object^ sender, System::EventArgs^ e) {
+		((Button^)sender)->BackgroundImage = gcnew System::Drawing::Bitmap(this->turaBmp,
+			((Button^)sender)->Size.Width, ((Button^)sender)->Size.Height);
+	}
+	private: System::Void buttonRzut_Resize(System::Object^ sender, System::EventArgs^ e) {
+		((Button^)sender)->BackgroundImage = gcnew System::Drawing::Bitmap(this->rzutBmp,
+			((Button^)sender)->Size.Width, ((Button^)sender)->Size.Height);
 	}
 	};
 }
