@@ -168,9 +168,11 @@ namespace Kosci {
 			this->Controls->Add(this->label_turnNum);
 			this->Controls->Add(this->label_p1Name);
 			this->Controls->Add(this->label_p2Name);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->MaximizeBox = false;
 			this->Name = L"StartWindow";
 			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
-			this->Text = L"Koœci";
+			this->Text = L"Dice Majster";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &StartWindow::StartWindow_FormClosing);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -195,6 +197,7 @@ namespace Kosci {
 	}
 private: System::Void StartWindow_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 }
+
 
 };
 }

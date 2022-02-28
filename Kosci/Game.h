@@ -24,9 +24,6 @@ public:
 	int getTotalScore(int pNumber);
 	bool isGameOver(int pNumber);
 	std::string getPlayerName(int pNumber);
-private:
-	bool areValuesSmallSequance(int* val);
-	bool areValuesLargeSequance(int* val);
 
 private:
 	std::string p1Name;

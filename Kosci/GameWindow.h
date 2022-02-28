@@ -58,6 +58,8 @@ namespace Kosci {
 	private: Bitmap^ turaBmp;
 
 	private: Game* game;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
 	private: StartWindow^ parent;
 	private: void HandleNewGame();
 	private: void HandleClosing();
@@ -124,6 +126,7 @@ namespace Kosci {
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label_availR = (gcnew System::Windows::Forms::Label());
 			this->label_curTurn = (gcnew System::Windows::Forms::Label());
 			this->label_Rerol = (gcnew System::Windows::Forms::Label());
@@ -153,6 +156,7 @@ namespace Kosci {
 			this->picturebox_D3P2 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D2P2 = (gcnew System::Windows::Forms::PictureBox());
 			this->picturebox_D1P2 = (gcnew System::Windows::Forms::PictureBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->gamefield_p1->SuspendLayout();
@@ -178,7 +182,7 @@ namespace Kosci {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(924, 24);
+			this->menuStrip1->Size = System::Drawing::Size(945, 24);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -221,6 +225,7 @@ namespace Kosci {
 			// 
 			// panel1
 			// 
+			this->panel1->Controls->Add(this->label1);
 			this->panel1->Controls->Add(this->label_availR);
 			this->panel1->Controls->Add(this->label_curTurn);
 			this->panel1->Controls->Add(this->label_Rerol);
@@ -231,13 +236,25 @@ namespace Kosci {
 			this->panel1->Controls->Add(this->gamefield_p1);
 			this->panel1->Location = System::Drawing::Point(0, 28);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(461, 661);
+			this->panel1->Size = System::Drawing::Size(461, 700);
 			this->panel1->TabIndex = 1;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->label1->Location = System::Drawing::Point(52, 391);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(319, 20);
+			this->label1->TabIndex = 8;
+			this->label1->Text = L"Zaznacz koœci, które chcesz zachowaæ";
+			this->label1->Click += gcnew System::EventHandler(this, &GameWindow::label1_Click);
 			// 
 			// label_availR
 			// 
 			this->label_availR->AutoSize = true;
-			this->label_availR->Location = System::Drawing::Point(129, 458);
+			this->label_availR->Location = System::Drawing::Point(129, 492);
 			this->label_availR->Name = L"label_availR";
 			this->label_availR->Size = System::Drawing::Size(0, 13);
 			this->label_availR->TabIndex = 7;
@@ -245,7 +262,7 @@ namespace Kosci {
 			// label_curTurn
 			// 
 			this->label_curTurn->AutoSize = true;
-			this->label_curTurn->Location = System::Drawing::Point(129, 439);
+			this->label_curTurn->Location = System::Drawing::Point(129, 473);
 			this->label_curTurn->Name = L"label_curTurn";
 			this->label_curTurn->Size = System::Drawing::Size(0, 13);
 			this->label_curTurn->TabIndex = 6;
@@ -253,7 +270,7 @@ namespace Kosci {
 			// label_Rerol
 			// 
 			this->label_Rerol->AutoSize = true;
-			this->label_Rerol->Location = System::Drawing::Point(34, 458);
+			this->label_Rerol->Location = System::Drawing::Point(34, 492);
 			this->label_Rerol->Name = L"label_Rerol";
 			this->label_Rerol->Size = System::Drawing::Size(89, 13);
 			this->label_Rerol->TabIndex = 5;
@@ -262,7 +279,7 @@ namespace Kosci {
 			// label_turnP1
 			// 
 			this->label_turnP1->AutoSize = true;
-			this->label_turnP1->Location = System::Drawing::Point(91, 439);
+			this->label_turnP1->Location = System::Drawing::Point(91, 473);
 			this->label_turnP1->Name = L"label_turnP1";
 			this->label_turnP1->Size = System::Drawing::Size(32, 13);
 			this->label_turnP1->TabIndex = 4;
@@ -270,43 +287,39 @@ namespace Kosci {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(37, 490);
-			this->textBox1->Multiline = true;
+			this->textBox1->Location = System::Drawing::Point(37, 523);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(357, 162);
 			this->textBox1->TabIndex = 3;
+			this->textBox1->Text = L"";
 			// 
 			// button2
 			// 
+			this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button2->Enabled = false;
-			this->button2->Location = System::Drawing::Point(319, 394);
+			this->button2->Location = System::Drawing::Point(319, 428);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 35);
 			this->button2->TabIndex = 2;
-			this->button2->Text = L"";
 			this->button2->UseVisualStyleBackColor = true;
-			this->button2->BackgroundImage = gcnew System::Drawing::Bitmap(this->turaBmp, 75, 35);
-			this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button2->Image = this->turaBmp;
 			this->button2->Click += gcnew System::EventHandler(this, &GameWindow::button2_Click);
 			this->button2->Resize += gcnew System::EventHandler(this, &GameWindow::buttonTura_Resize);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(37, 394);
+			this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button1->Location = System::Drawing::Point(37, 428);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 35);
 			this->button1->TabIndex = 1;
-			this->button1->Text = L"";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->BackgroundImage = gcnew System::Drawing::Bitmap(this->rzutBmp, 75, 35);
-			this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button1->Image = this->rzutBmp;
 			this->button1->Click += gcnew System::EventHandler(this, &GameWindow::button1_Click);
 			this->button1->Resize += gcnew System::EventHandler(this, &GameWindow::buttonRzut_Resize);
-
 			// 
 			// gamefield_p1
 			// 
-			this->gamefield_p1->BackColor = System::Drawing::Color::Lime;
 			this->gamefield_p1->Controls->Add(this->label_p1Name);
 			this->gamefield_p1->Controls->Add(this->picturebox_D5P1);
 			this->gamefield_p1->Controls->Add(this->picturebox_D4P1);
@@ -322,6 +335,9 @@ namespace Kosci {
 			// 
 			// label_p1Name
 			// 
+			this->label_p1Name->BackColor = System::Drawing::Color::Transparent;
+			this->label_p1Name->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
 			this->label_p1Name->AutoSize = true;
 			this->label_p1Name->Location = System::Drawing::Point(176, 20);
 			this->label_p1Name->Name = L"label_p1Name";
@@ -395,6 +411,9 @@ namespace Kosci {
 			// 
 			// label_p2Name
 			// 
+			this->label_p2Name->BackColor = System::Drawing::Color::Transparent;
+			this->label_p2Name->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
 			this->label_p2Name->AutoSize = true;
 			this->label_p2Name->Location = System::Drawing::Point(176, 20);
 			this->label_p2Name->Name = L"label_p2Name";
@@ -404,7 +423,7 @@ namespace Kosci {
 			// label_availRP2
 			// 
 			this->label_availRP2->AutoSize = true;
-			this->label_availRP2->Location = System::Drawing::Point(129, 458);
+			this->label_availRP2->Location = System::Drawing::Point(133, 492);
 			this->label_availRP2->Name = L"label_availRP2";
 			this->label_availRP2->Size = System::Drawing::Size(0, 13);
 			this->label_availRP2->TabIndex = 7;
@@ -412,7 +431,7 @@ namespace Kosci {
 			// label_curTurnP2
 			// 
 			this->label_curTurnP2->AutoSize = true;
-			this->label_curTurnP2->Location = System::Drawing::Point(129, 439);
+			this->label_curTurnP2->Location = System::Drawing::Point(133, 473);
 			this->label_curTurnP2->Name = L"label_curTurnP2";
 			this->label_curTurnP2->Size = System::Drawing::Size(0, 13);
 			this->label_curTurnP2->TabIndex = 6;
@@ -421,7 +440,7 @@ namespace Kosci {
 			// label_RerolP2
 			// 
 			this->label_RerolP2->AutoSize = true;
-			this->label_RerolP2->Location = System::Drawing::Point(34, 458);
+			this->label_RerolP2->Location = System::Drawing::Point(38, 492);
 			this->label_RerolP2->Name = L"label_RerolP2";
 			this->label_RerolP2->Size = System::Drawing::Size(89, 13);
 			this->label_RerolP2->TabIndex = 5;
@@ -430,7 +449,7 @@ namespace Kosci {
 			// label_turnP2
 			// 
 			this->label_turnP2->AutoSize = true;
-			this->label_turnP2->Location = System::Drawing::Point(91, 439);
+			this->label_turnP2->Location = System::Drawing::Point(95, 473);
 			this->label_turnP2->Name = L"label_turnP2";
 			this->label_turnP2->Size = System::Drawing::Size(32, 13);
 			this->label_turnP2->TabIndex = 4;
@@ -438,6 +457,7 @@ namespace Kosci {
 			// 
 			// panel2
 			// 
+			this->panel2->Controls->Add(this->label2);
 			this->panel2->Controls->Add(this->textBox2);
 			this->panel2->Controls->Add(this->button4);
 			this->panel2->Controls->Add(this->button3);
@@ -448,47 +468,44 @@ namespace Kosci {
 			this->panel2->Controls->Add(this->gamefield_p2);
 			this->panel2->Location = System::Drawing::Point(462, 28);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(462, 661);
+			this->panel2->Size = System::Drawing::Size(483, 700);
 			this->panel2->TabIndex = 2;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(33, 490);
-			this->textBox2->Multiline = true;
+			this->textBox2->Location = System::Drawing::Point(37, 523);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(357, 162);
 			this->textBox2->TabIndex = 4;
+			this->textBox2->Text = L"";
 			// 
 			// button4
 			// 
+			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->button4->Enabled = false;
-			this->button4->Location = System::Drawing::Point(315, 394);
+			this->button4->Location = System::Drawing::Point(319, 428);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(75, 35);
 			this->button4->TabIndex = 2;
-			this->button4->Text = L"";
 			this->button4->UseVisualStyleBackColor = true;
-			this->button4->BackgroundImage = gcnew System::Drawing::Bitmap(this->turaBmp, 75, 35);
-			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button4->Image = this->turaBmp;
 			this->button4->Click += gcnew System::EventHandler(this, &GameWindow::button4_Click);
 			this->button4->Resize += gcnew System::EventHandler(this, &GameWindow::buttonTura_Resize);
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(33, 394);
+			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button3->Location = System::Drawing::Point(37, 428);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 35);
 			this->button3->TabIndex = 1;
-			this->button3->Text = L"";
 			this->button3->UseVisualStyleBackColor = true;
-			this->button3->BackgroundImage = gcnew System::Drawing::Bitmap(this->rzutBmp, 75, 35);
-			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button3->Image = this->rzutBmp;
 			this->button3->Click += gcnew System::EventHandler(this, &GameWindow::button3_Click);
 			this->button3->Resize += gcnew System::EventHandler(this, &GameWindow::buttonRzut_Resize);
 			// 
 			// gamefield_p2
 			// 
-			this->gamefield_p2->BackColor = System::Drawing::Color::Lime;
 			this->gamefield_p2->Controls->Add(this->label_p2Name);
 			this->gamefield_p2->Controls->Add(this->picturebox_D5P2);
 			this->gamefield_p2->Controls->Add(this->picturebox_D4P2);
@@ -497,7 +514,7 @@ namespace Kosci {
 			this->gamefield_p2->Controls->Add(this->picturebox_D1P2);
 			this->gamefield_p2->Location = System::Drawing::Point(0, 0);
 			this->gamefield_p2->Name = L"gamefield_p2";
-			this->gamefield_p2->Size = System::Drawing::Size(462, 387);
+			this->gamefield_p2->Size = System::Drawing::Size(483, 387);
 			this->gamefield_p2->BackgroundImage = gcnew System::Drawing::Bitmap("Resources\\Bitmaps\\tlo.jpg");
 			this->gamefield_p2->TabIndex = 0;
 			this->gamefield_p2->TabStop = false;
@@ -566,19 +583,29 @@ namespace Kosci {
 			this->picturebox_D1P2->Tag = gcnew IndexTag(4);
 			this->picturebox_D1P2->Click += gcnew System::EventHandler(this, &GameWindow::picturebox_Click);
 			this->picturebox_D1P2->Resize += gcnew System::EventHandler(this, &GameWindow::picturebox_Resize);
-
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->label2->Location = System::Drawing::Point(72, 390);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(319, 20);
+			this->label2->TabIndex = 9;
+			this->label2->Text = L"Zaznacz koœci, które chcesz zachowaæ";
 			// 
 			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(924, 692);
+			this->ClientSize = System::Drawing::Size(945, 725);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"GameWindow";
-			this->Text = L"Kosci";
+			this->Text = L"DiceMajster";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &GameWindow::Main_FormClosing);
 			this->Resize += gcnew System::EventHandler(this, &GameWindow::GameWindow_Resize);
 			this->menuStrip1->ResumeLayout(false);
@@ -696,10 +723,10 @@ namespace Kosci {
 
 			c->Scale(scaleWidth, scaleHeight);
 			if (c->GetType() == Panel::typeid) {
-				if(((Panel^)c)->Name == "panel2") {
+				if (((Panel^)c)->Name == "panel2") {
 					((Panel^)c)->Location.X = this->panel1->Location.X + this->panel1->Size.Width;
 					((Panel^)c)->Location.Y = this->panel1->Location.Y;
-			}
+				}
 			}
 			else {
 				c->Location.X = c->Location.X * scaleWidth;
@@ -710,13 +737,13 @@ namespace Kosci {
 		this->prevHeight = this->Size.Height;
 	}
 	private: System::Void picturebox_Resize(System::Object^ sender, System::EventArgs^ e) {
-		if (((PictureBox^)sender)->Visible){
+		if (((PictureBox^)sender)->Visible) {
 			int pNumber = ((PictureBox^)sender)->Parent->Name == "gamefield_p1" ? 0 : 1;
 			int value = this->game->getDiceValue(pNumber, ((IndexTag^)((PictureBox^)sender)->Tag)->getIndex());
 			if (((IndexTag^)((PictureBox^)sender)->Tag)->getIsSelected()) {
 				((PictureBox^)sender)->Image = gcnew System::Drawing::Bitmap(
 					this->selectedDicePictures[value - 1],
-							((PictureBox^)sender)->Size.Width, ((PictureBox^)sender)->Size.Height);
+					((PictureBox^)sender)->Size.Width, ((PictureBox^)sender)->Size.Height);
 			}
 			else {
 				((PictureBox^)sender)->Image = gcnew System::Drawing::Bitmap(
@@ -732,6 +759,8 @@ namespace Kosci {
 	private: System::Void buttonRzut_Resize(System::Object^ sender, System::EventArgs^ e) {
 		((Button^)sender)->BackgroundImage = gcnew System::Drawing::Bitmap(this->rzutBmp,
 			((Button^)sender)->Size.Width, ((Button^)sender)->Size.Height);
+	}
+	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};
 }

@@ -159,7 +159,7 @@ int  Game::calculateScore(int pNumber) {
 			return 30;
 		}
 		else if (containsFour) {
-			return 20;
+			return 25;
 		}
 		else if (containsPair && containsThrees) {
 			return 15;
@@ -244,16 +244,3 @@ int Game::getTotalScore(int pNumber)
 		return this->totalPointsP1;
 }
 
-bool Game::areValuesSmallSequance(int* val) {
-	if (val[0] && val[1] && val[2] && val[3] || val[1] && val[2] && val[3] && val[4] ||
-		val[2] && val[3] && val[4] && val[5])
-		return true;
-	return false;
-}
-
-bool Game::areValuesLargeSequance(int* val) {
-	if (val[0] && val[1] && val[2] && val[3] && val[4] ||
-		val[1] && val[2] && val[3] && val[4] && val[5])
-		return true;
-	return false;
-}
